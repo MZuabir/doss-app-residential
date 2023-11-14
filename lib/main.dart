@@ -1,8 +1,10 @@
-import 'package:doss/utils/size_config.dart';
-import 'package:doss/view/pages/splash/splash.dart';
+
+import 'package:doss_resident/utils/size_config.dart';
+import 'package:doss_resident/view/pages/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+
 
 void main() {
   runApp(const MyApp());

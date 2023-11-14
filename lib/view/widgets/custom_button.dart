@@ -1,5 +1,5 @@
-import 'package:doss/constants/colors.dart';
 import 'package:flutter/material.dart';
+import '../../constants/colors.dart';
 import '../../utils/size_config.dart';
 
 class CustomButton extends StatelessWidget {
@@ -18,6 +18,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height??SizeConfig.heightMultiplier*6,
+        width: SizeConfig.widthMultiplier*100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color:isEnabled? AppColors.primaryClr:Colors.grey,
@@ -28,7 +29,7 @@ class CustomButton extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textMultiplier * 2.2,
+                fontSize: height==null?SizeConfig.textMultiplier * 2.2:SizeConfig.textMultiplier * 1.6,
             ),
           ),
         ),

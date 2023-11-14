@@ -1,9 +1,8 @@
-import 'package:doss/utils/spacing.dart';
-import 'package:doss/view/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../utils/size_config.dart';
+import '../../../utils/spacing.dart';
+import '../../widgets/background.dart';
 import '../onboarding/onboarding.dart';
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -21,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 4));
-    Get.off(()=>const OnBoarding(),);
+    Get.off(()=>const OnBoardingPage(),);
   }
 
   @override

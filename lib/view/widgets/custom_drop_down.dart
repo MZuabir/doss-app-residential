@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
 import '../../utils/spacing.dart';
 
 
@@ -32,7 +33,7 @@ class CustomDropdown extends StatelessWidget {
             height: 50,
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            color: Colors.white,
+            color: AppColors.fieldClr,
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
                 isExpanded: true,

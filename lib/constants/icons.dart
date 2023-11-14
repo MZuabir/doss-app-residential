@@ -17,4 +17,10 @@ class AppIcons {
   static String microPhone = "assets/icons/microphone.png";
   static String send = "assets/icons/send.png";
   static String clip = "assets/icons/clip.png";
+  static String upload = "assets/icons/image-upload.png";
+  static String locationVerified = "assets/icons/location_verified.png";
+  static String location = "assets/icons/location.png";
+  static String verify = "assets/icons/verify.png";
+  static String cancel = "assets/icons/cancel.png";
+  static String guard = "assets/icons/guard.png";
 }

@@ -1,9 +1,9 @@
-import 'package:doss/constants/colors.dart';
-import 'package:doss/constants/icons.dart';
-import 'package:doss/utils/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constants/colors.dart';
+import '../../constants/icons.dart';
 import '../../utils/size_config.dart';
+import '../../utils/spacing.dart';
 
 class CustomAppbar extends StatelessWidget {
    const CustomAppbar({super.key, required this.title, this.onTap,  this.isIcon=false,this.icon});

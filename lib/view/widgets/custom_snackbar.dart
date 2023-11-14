@@ -1,5 +1,7 @@
-import 'package:doss/constants/colors.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../constants/colors.dart';
 
 class CustomSnackBar extends StatelessWidget {
   final String? title;

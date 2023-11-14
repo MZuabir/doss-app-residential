@@ -1,6 +1,7 @@
-import 'package:doss/constants/colors.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/size_config.dart';
+
+import '../../constants/colors.dart';
+import '../../utils/size_config.dart';
 
 class Background extends StatefulWidget {
   const Background({super.key, required this.child});

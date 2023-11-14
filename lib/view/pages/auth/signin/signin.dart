@@ -1,20 +1,18 @@
-import 'package:doss/controllers/sign_in.dart';
-import 'package:doss/utils/size_config.dart';
-import 'package:doss/view/widgets/auth_textfield.dart';
-import 'package:doss/view/widgets/background.dart';
-import 'package:doss/view/widgets/custom_appbar.dart';
-import 'package:doss/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
 import '../../../../constants/colors.dart';
 import '../../../../constants/icons.dart';
+import '../../../../controllers/sign_in.dart';
+import '../../../../utils/size_config.dart';
 import '../../../../utils/spacing.dart';
+import '../../../widgets/auth_textfield.dart';
+import '../../../widgets/background.dart';
+import '../../../widgets/custom_appbar.dart';
+import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_snackbar.dart';
 import '../../../widgets/txt_button.dart';
-import '../../bottomnav/bottom_nav_bar.dart';
+import '../signup/signup_onboarding.dart';
 
 
 class SignInPage extends StatefulWidget {
@@ -79,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
                           );
                         }
                         else{
-                          Get.to(()=>const BottomNavPage());
+                          // Get.to(()=>const BottomNavPage());
                         }
                       },
                   isEnabled: signInCont.isEnabled.value,
@@ -118,7 +116,12 @@ class _SignInPageState extends State<SignInPage> {
                         textAlign: TextAlign.center,
                         style: textTheme.bodyMedium,
                       ),
-                      const CustomTextBtn(title: "Register",),
+                       CustomTextBtn(
+                        title: "Register",
+                        onTap: (){
+                          Get.to(()=>const SignUpOnBoardingPage());
+                        },
+                      ),
                     ],
                   ),
                   Row(

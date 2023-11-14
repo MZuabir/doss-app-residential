@@ -1,23 +1,25 @@
-import 'package:doss/utils/size_config.dart';
-import 'package:doss/utils/spacing.dart';
-import 'package:doss/view/pages/onboarding/components/onboardingpages.dart';
-import 'package:doss/view/widgets/background.dart';
-import 'package:doss/view/widgets/txt_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../ models/on_boarding.dart';
 import '../../../constants/colors.dart';
-import '../../../models/on_boarding.dart';
+import '../../../utils/size_config.dart';
+import '../../../utils/spacing.dart';
+import '../../widgets/background.dart';
 import '../../widgets/custom_button.dart';
+import '../../widgets/txt_button.dart';
 import '../access/access.dart';
+import 'components/onboardingpages.dart';
 
-class OnBoarding extends StatefulWidget {
-  const OnBoarding({Key? key}) : super(key: key);
+
+class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({Key? key}) : super(key: key);
 
   @override
-  State<OnBoarding> createState() => _OnBoardingState();
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
-class _OnBoardingState extends State<OnBoarding> {
+class _OnBoardingPageState extends State<OnBoardingPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -53,12 +55,16 @@ class _OnBoardingState extends State<OnBoarding> {
                       top: SizeConfig.heightMultiplier * 7,
                       left: 0,
                       right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          onBoardingData.length,
-                              (index) => Expanded(child: buildDotIndicator(index)),
-                        ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              onBoardingData.length,
+                                  (index) => Expanded(child: buildDotIndicator(index)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

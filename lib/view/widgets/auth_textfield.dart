@@ -1,9 +1,9 @@
-import 'package:doss/utils/spacing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
 import '../../utils/size_config.dart';
+import '../../utils/spacing.dart';
 
 class AuthTextField extends StatefulWidget {
   const AuthTextField({

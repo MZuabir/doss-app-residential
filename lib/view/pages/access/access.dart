@@ -1,15 +1,15 @@
-import 'package:doss/constants/colors.dart';
-import 'package:doss/constants/icons.dart';
-import 'package:doss/utils/size_config.dart';
-import 'package:doss/view/widgets/background.dart';
-import 'package:doss/view/widgets/custom_button.dart';
-import 'package:doss/view/widgets/txt_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-
+import '../../../constants/colors.dart';
+import '../../../constants/icons.dart';
+import '../../../utils/size_config.dart';
 import '../../../utils/spacing.dart';
+import '../../widgets/background.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/txt_button.dart';
 import '../auth/signin/signin.dart';
+
 
 
 class AccessPage extends StatefulWidget {
