@@ -47,5 +47,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
     	<string>The app needs photo library access to allow users to upload images of PAN etc for KYC verification purposes.  The KYC images uploaded will only be used for KYC verification purposes which is necessary for anyone to invest in our assets as per regulations.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
