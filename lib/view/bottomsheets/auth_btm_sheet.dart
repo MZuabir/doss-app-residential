@@ -1,4 +1,9 @@
+import 'package:doss_resident/constants/cont.dart';
+import 'package:doss_resident/view/widgets/loading.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../constants/colors.dart';
 import '../../utils/size_config.dart';
@@ -11,7 +16,13 @@ class AuthBottomSheet extends StatelessWidget {
   final String title;
   final String description;
   final Function()? onTap;
-  const AuthBottomSheet({super.key, required this.icon, this.onTap, required this.btnTitle, required this.title, required this.description});
+  const AuthBottomSheet(
+      {super.key,
+      required this.icon,
+      this.onTap,
+      required this.btnTitle,
+      required this.title,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +30,8 @@ class AuthBottomSheet extends StatelessWidget {
     return Container(
       color: Colors.black,
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*2.5),
+        padding:
+            EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 2.5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -27,23 +39,32 @@ class AuthBottomSheet extends StatelessWidget {
             CircleAvatar(
               radius: 23,
               backgroundColor: AppColors.darkGryClr,
-              child: Image.asset(icon,
-                height: SizeConfig.imageSizeMultiplier*7,
-                width: SizeConfig.imageSizeMultiplier*7,
+              child: Image.asset(
+                icon,
+                height: SizeConfig.imageSizeMultiplier * 7,
+                width: SizeConfig.imageSizeMultiplier * 7,
               ),
             ),
             Spacing.y(3),
             Text(
               title,
-              style: textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
+              textAlign: TextAlign.center,
+              style: textTheme.headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w600),
+            ).tr(),
             Spacing.y(3),
-            Text(description,
+            Text(
+              description,
               style: textTheme.bodySmall,
               textAlign: TextAlign.center,
-            ),
+            ).tr(),
             Spacing.y(3),
-            CustomButton(title: btnTitle, onTap:onTap,
+            Obx(
+              () => CustomButton(
+                title: tr(btnTitle),
+                isLoading: authCont.isLoading.value,
+                onTap: onTap,
+              ),
             ),
             Spacing.y(5),
           ],
@@ -52,7 +73,3 @@ class AuthBottomSheet extends StatelessWidget {
     );
   }
 }
-
-
-
-

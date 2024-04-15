@@ -1,71 +1,86 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../constants/colors.dart';
 import '../../constants/icons.dart';
 import '../../utils/size_config.dart';
 import '../../utils/spacing.dart';
 
-class CustomImagePicker extends StatefulWidget {
-  const CustomImagePicker({Key? key}) : super(key: key);
+class CustomImagePicker extends StatelessWidget {
+  final String? baseImage;
+  final Function()? onTap;
+  final bool isSmallPhoto;
+  final XFile? photo; // Pass the photo as a parameter
 
-  @override
-  State<CustomImagePicker> createState() => _CustomImagePickerState();
-}
+  const CustomImagePicker(
+      {Key? key,
+      this.baseImage,
+      this.onTap,
+      this.photo,
+      this.isSmallPhoto = false})
+      : super(key: key);
 
-class _CustomImagePickerState extends State<CustomImagePicker> {
-  XFile? _image;
-
-  Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = image;
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Upload Photo",
-          style: textTheme.bodyLarge,
-        ),
+          style: Theme.of(context).textTheme.bodyLarge,
+        ).tr(),
         Spacing.y(1),
         GestureDetector(
-          onTap: (){
-            _pickImage();
-          },
-          child: Container(
-            height: SizeConfig.heightMultiplier*6.5,
-            width: SizeConfig.widthMultiplier*100,
-            color: AppColors.fieldClr,
-            padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Select file",
-                  style: textTheme.bodyLarge!.copyWith(color: Colors.black45,fontWeight: FontWeight.w500),
+          onTap: onTap,
+          child: Column(
+            children: [
+              Container(
+                height: SizeConfig.heightMultiplier * 6.5,
+                width: SizeConfig.widthMultiplier * 100,
+                color: AppColors.fieldClr,
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.widthMultiplier * 3),
+                child: Row(
+                  children: [
+                    Text(
+                      "Select Image",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ).tr(),
+                    const Spacer(),
+                    isSmallPhoto
+                        ? photo == null
+                            ? const SizedBox()
+                            : Image.file(
+                                File(photo!.path),
+                                height: SizeConfig.heightMultiplier * 20,
+                              )
+                        : const SizedBox(),
+                    Spacing.x(2),
+                    Image.asset(
+                      AppIcons.upload,
+                      height: SizeConfig.imageSizeMultiplier * 6,
+                      width: SizeConfig.imageSizeMultiplier * 6,
+                    ),
+                  ],
                 ),
-                Image.asset(
-                  AppIcons.upload,
-                  height: SizeConfig.imageSizeMultiplier*6,
-                  width: SizeConfig.imageSizeMultiplier*6,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        _image == null?const SizedBox():Spacing.y(3),
-        _image == null?const SizedBox(): Image.file(
-          File(_image!.path),
-          height: SizeConfig.heightMultiplier*20,
-          width: SizeConfig.widthMultiplier*100,
-          fit: BoxFit.fill,
-        ),
+        if (photo != null && !isSmallPhoto) ...[
+          Spacing.y(3),
+          Image.file(
+            File(photo!.path),
+            height: SizeConfig.heightMultiplier * 20,
+            width: SizeConfig.widthMultiplier * 100,
+          ),
+        ],
       ],
     );
   }

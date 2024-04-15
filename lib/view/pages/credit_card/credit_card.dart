@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../constants/icons.dart';
 import '../../../../../utils/spacing.dart';
@@ -7,24 +9,25 @@ import '../../bottomsheets/auth_btm_sheet.dart';
 import '../../widgets/auth_textfield.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down.dart';
+import '../bottomnav/bottom_nav_bar.dart';
 
 class CreditCardPage extends StatefulWidget {
-  final Function()? onTap;
-  const CreditCardPage({Key? key, this.onTap}) : super(key: key);
+  const CreditCardPage({Key? key,}) : super(key: key);
 
   @override
   State<CreditCardPage> createState() => _CreditCardPageState();
 }
 
 class _CreditCardPageState extends State<CreditCardPage> {
-  final homeController=TextEditingController();
-  final commercialController=TextEditingController();
-  final agencyController=TextEditingController();
-  final accountController=TextEditingController();
+  final cardController=TextEditingController();
+  final cardNumberController=TextEditingController();
+  final dateController=TextEditingController();
 
-  List<String> bank=["HBL","MCB"];
+  List<String> month=["January","February"];
+  List<String> year=["2023","2024"];
 
-  String? selectedBank;
+  String? selectedMonth;
+  String? selectedYear;
 
   @override
   Widget build(BuildContext context) {
@@ -36,60 +39,96 @@ class _CreditCardPageState extends State<CreditCardPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Spacing.y(2),
-            Text("Plans and payments",
+            Text("Payment Information",
               style: textTheme.headlineMedium,
-            ),
+            ).tr(),
             Spacing.y(3),
-            Text("How much do you want to charge your future customers monthly?",
-              style: textTheme.bodySmall,
-            ),
-            Spacing.y(3),
+                AuthTextField(
+                    title: "Card data",
+                    hintText: "  JOAO ALVES MOURA", controller:cardController ),
+                AuthTextField(
+                    title: "Commercial plan",
+                    isTitle: false,
+                    hintText: "00 0000 00000", controller:cardNumberController ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                  child: AuthTextField(
-                      title: "Home plan",
-                      hintText: "RS 00.00", controller:homeController ),
+                  child: CustomDropdown(
+                    selectedValue: selectedMonth,
+                    items: month,
+                    onChanged: (value){
+                      setState(() {
+                        selectedMonth=value;
+                      });
+                    },
+                    title: "Maturity",
+                    hint: "September",
+                  ),
                 ),
                 Spacing.x(3),
                 Expanded(
-                  child: AuthTextField(
-                      title: "Commercial plan",
-                      hintText: "RS 00.00", controller:commercialController ),
+                  child: CustomDropdown(
+                    selectedValue: selectedYear,
+                    isTitle: false,
+                    items: year,
+                    onChanged: (value){
+                      setState(() {
+                        selectedYear=value;
+                      });
+                    },
+                    title: "2023",
+                    hint: "September",
+                  ),
                 ),
               ],
-            ),
-            CustomDropdown(
-              selectedValue: selectedBank,
-              items: bank,
-              onChanged: (value){
-                setState(() {
-                  selectedBank=value;
-                });
-              },
-              title: "Data for receiving payment",
-              hint: "Select bank",
             ),
             Spacing.y(2),
+             SizedBox(
+               width: SizeConfig.widthMultiplier*46,
+               child: AuthTextField(
+                      hintText: "000", controller:dateController,isTitle: false, ),
+             ),
+            Spacing.y(3),
+            Align(
+              alignment: Alignment.center,
+              child: Text("We will send payment details to your email after confirmation.",
+                textAlign: TextAlign.center,
+                style: textTheme.bodySmall,
+              ).tr(),
+            ),
+            Spacing.y(3),
+            Spacer(),
             Row(
               children: [
                 Expanded(
-                  child: AuthTextField(
-                    hintText: "Agency", controller:agencyController,isTitle: false, ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Total",
+                      style: textTheme.bodySmall,
+                      ).tr(),
+                      Text("R\$ 29.90",
+                        style: textTheme.headlineSmall,
+                      ),
+                      Text("R\$5 ${tr("convenience fee")}",
+                        style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
                 ),
-                Spacing.x(3),
                 Expanded(
-                  child: AuthTextField(
-                    hintText: "Account", controller:accountController,isTitle: false, ),
+                  flex: 1,
+                  child: CustomButton(
+                    title: "Pay Now",
+                    onTap: (){
+                      _showBottomSheet(context);
+                    },
+                  ),
                 ),
               ],
             ),
-            CustomButton(
-              title: "Next",
-              onTap: (){
-                _showBottomSheet(context);
-              },
-            ),
+            Spacing.y(3),
 
 
           ],
@@ -103,10 +142,14 @@ class _CreditCardPageState extends State<CreditCardPage> {
       builder: (BuildContext context) {
         return   AuthBottomSheet(
           icon: AppIcons.verify,
-          onTap: widget.onTap,
-          btnTitle: 'Proceed to the app',
-          title: 'Congratulations!',
-          description: 'Your registration has been completed and approved successfully!Enjoy the benefits of the app and find customers closest to you!',
+          onTap: (){
+            Get.to(()=>const BottomNavPage(),
+            transition: Transition.rightToLeft,
+            );
+          },
+          btnTitle: 'Continue to the app',
+          title: 'Payment made successfully!',
+          description: 'Congratulations, you have subscribed to DossApp, your days are starting to become safer with us!',
         ); // Use the separate BottomSheet widget
       },
     );

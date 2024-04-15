@@ -7,6 +7,7 @@ class SignUpCont extends GetxController {
   RxBool termsAndPolicies = false.obs;
   RxBool age = false.obs;
 
+  PageController pageController = PageController();
   @override
   void onInit() {
     super.onInit();

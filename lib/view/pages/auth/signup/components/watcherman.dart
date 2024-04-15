@@ -2,6 +2,7 @@ import 'package:doss_resident/constants/colors.dart';
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:doss_resident/utils/spacing.dart';
 import 'package:doss_resident/view/widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,10 +23,10 @@ class WatcherManPage extends StatelessWidget {
         Spacing.y(10),
         Text("These are the watchmen available to you",
         style: textTheme.bodyMedium,
-        ),
+        ).tr(),
         Text("Select one to continue",
           style: textTheme.bodyMedium,
-        ),
+        ).tr(),
         Spacing.y(5),
         SizedBox(
           height: SizeConfig.heightMultiplier*42,
@@ -91,7 +92,7 @@ class PlanCard extends StatelessWidget {
                   children: [
                     Text("Plans starting from",
                       style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600),
-                    ),
+                    ).tr(),
                     Text(" R\$ 29.90",
                       style: textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600,color: AppColors.primaryClr),
                     ),

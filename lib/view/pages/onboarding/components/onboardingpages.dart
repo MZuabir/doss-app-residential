@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/size_config.dart';
@@ -23,13 +24,13 @@ class OnBoardingPages extends StatelessWidget {
         Spacing.y(5),
         Text(title,
           style:textTheme.headlineMedium,
-        ),
+        ).tr(),
         Spacing.y(2),
         Text(
           description,
           textAlign: TextAlign.center,
           style:textTheme.bodyMedium,
-        ),
+        ).tr(),
       ],
     );
   }

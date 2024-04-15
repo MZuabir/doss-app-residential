@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/size_config.dart';
@@ -13,7 +14,7 @@ class CustomTextBtn extends StatelessWidget {
     return TextButton(
         onPressed: onTap,
         child: Text(
-          title,
+          tr(title),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,

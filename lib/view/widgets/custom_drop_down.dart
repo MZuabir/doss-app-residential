@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
@@ -6,7 +7,8 @@ import '../../utils/spacing.dart';
 
 class CustomDropdown extends StatelessWidget {
   final String? selectedValue;
-  final String title;
+  final String? title;
+  final bool? isTitle;
   final String hint;
   final List<String> items;
   final ValueChanged<String?>? onChanged;
@@ -15,7 +17,7 @@ class CustomDropdown extends StatelessWidget {
     required this.selectedValue,
     required this.items,
     required this.onChanged,
-    required this.title, required this.hint,
+     this.title, required this.hint, this.isTitle=true,
   });
 
   @override
@@ -24,9 +26,9 @@ class CustomDropdown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title,
+        isTitle==true?Text(title??"",
           style: textTheme.bodyLarge,
-        ),
+        ).tr():const SizedBox(),
         Spacing.y(1),
         Center(
           child: Container(

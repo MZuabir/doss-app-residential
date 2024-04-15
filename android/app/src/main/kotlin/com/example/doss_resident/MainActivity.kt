@@ -1,4 +1,4 @@
-package br.com.doss.app
+package com.example.doss_resident
 
 import io.flutter.embedding.android.FlutterActivity
 

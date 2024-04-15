@@ -1,5 +1,6 @@
 import 'package:doss_resident/controllers/plans.dart';
 import 'package:doss_resident/view/widgets/txt_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,12 +46,12 @@ class PlansBottomSheet extends StatelessWidget {
           Text(
             title,
             style: textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
-          ),
+          ).tr(),
           Spacing.y(2),
           Text(description,
             style: textTheme.bodySmall,
             textAlign: TextAlign.center,
-          ),
+          ).tr(),
           Spacing.y(8),
           ...List.generate(2, (index) => Obx(
         ()=> GestureDetector(
@@ -79,7 +80,7 @@ class PlansBottomSheet extends StatelessWidget {
                         Text(
                           "Home plan",
                           style: textTheme.bodyMedium,
-                        ),
+                        ).tr(),
                         AnimatedContainer(
                           duration:
                           const Duration(milliseconds: 200),
@@ -121,7 +122,7 @@ class PlansBottomSheet extends StatelessWidget {
                       ],
                     ),
                     Spacing.y(1),
-                    Text("+ R\$5 convenience fee",
+                    Text("+ R\$5+ ${tr("convenience fee")}",
                     style: textTheme.bodySmall,
                     )
                   ],
@@ -131,8 +132,7 @@ class PlansBottomSheet extends StatelessWidget {
           ),
           ),
           Spacer(),
-          CustomButton(title: btnTitle, onTap:onTap,
-          ),
+          CustomButton(title: tr(btnTitle), onTap:onTap,),
           Spacing.y(2),
           CustomTextBtn(
             title: "To go back",

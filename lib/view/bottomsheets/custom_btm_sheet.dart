@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,9 +11,13 @@ import '../widgets/txt_button.dart';
 class CustomBottomSheet extends StatelessWidget {
   final String icon;
   final String btnTitle;
+  final String? textBtnTitle;
   final String title;
+  final String? description;
   final Function()? onTap;
-   const CustomBottomSheet({super.key, required this.icon, this.onTap, required this.btnTitle, required this.title});
+   const CustomBottomSheet({super.key,
+     required this.icon,
+     this.onTap, required this.btnTitle, required this.title, this.description,  this.textBtnTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +43,18 @@ class CustomBottomSheet extends StatelessWidget {
             Text(
               title,
               style: textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
-            ),
+            ).tr(),
+            description==null?const SizedBox(): Spacing.y(2),
+          description==null?const SizedBox():  Text(
+              description??"",
+              textAlign: TextAlign.center,
+              style: textTheme.bodySmall,
+            ).tr(),
             Spacing.y(3),
-            CustomButton(title: btnTitle, onTap:onTap,
+            CustomButton(title: tr(btnTitle), onTap:onTap,
             ),
-            Spacing.y(2),
-            CustomTextBtn(title: "To go back",
+            textBtnTitle==null?SizedBox(): Spacing.y(2),
+            textBtnTitle==null?SizedBox():  CustomTextBtn(title: tr(textBtnTitle??""),
             onTap: (){
               Get.back();
             },

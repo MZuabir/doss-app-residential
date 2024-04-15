@@ -23,4 +23,6 @@ class AppIcons {
   static String verify = "assets/icons/verify.png";
   static String cancel = "assets/icons/cancel.png";
   static String guard = "assets/icons/guard.png";
+  static String flagUK='assets/icons/united-kingdom.png';
+  static String flagBrazil='assets/icons/brazil.png';
 }

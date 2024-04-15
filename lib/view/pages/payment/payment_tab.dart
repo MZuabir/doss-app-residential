@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,14 +14,13 @@ import '../credit_card/credit_card.dart';
 
 class PaymentTabPage extends StatelessWidget {
   final cont=Get.put(PaymentTabCont());
-  final PageController _pageController = PageController();
 
   PaymentTabPage({super.key});
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     List<String> statusTitle = [
-      "Credit Card",
+      tr("Credit Card"),
       "PIX",
     ];
     return  Obx(
@@ -49,13 +49,6 @@ class PaymentTabPage extends StatelessWidget {
                           (index) => GestureDetector(
                         onTap: () {
                            cont.selectedStatus.value = index;
-                           _pageController.page==0.0?  _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          ):_pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -94,23 +87,7 @@ class PaymentTabPage extends StatelessWidget {
                 ),
               ),
               Spacing.y(3),
-              Expanded(
-                child: PageView.builder(
-                  itemCount: statusTitle.length,
-                  controller: _pageController,
-                  onPageChanged: (int index) {
-                      cont.selectedStatus.value = index;
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    if(cont.selectedStatus.value==0) {
-                      return CreditCardPage();
-                    }
-                    if(cont.selectedStatus.value==1) {
-                      return CreditCardPage();
-                    }
-                  },),
-              ),
-              // cont.selectedStatus.value==0? const CreditCardPage():const SizedBox(),
+              cont.selectedStatus.value==0? const CreditCardPage():const SizedBox(),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
@@ -27,7 +28,7 @@ class CustomAppbar extends StatelessWidget {
           ),
         ),
         const Spacer(),
-       Text(title,
+       Text(tr(title),
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600)
            ),

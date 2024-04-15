@@ -52,16 +52,16 @@ final List<HomeGridModel> homeGridData = [
     title: 'Vehicles',
   ),
   HomeGridModel(
-    icon: AppIcons.profile,
-    title: 'Notifications',
+    icon: AppIcons.people,
+    title: 'Relatives',
   ),
   HomeGridModel(
-    icon: AppIcons.people,
-    title: 'Customers',
+    icon: AppIcons.security,
+    title: 'Signature',
   ),
   HomeGridModel(
     icon: AppIcons.refresh,
-    title: 'Historic',
+    title: 'History',
   ),
   HomeGridModel(
     icon: AppIcons.message,

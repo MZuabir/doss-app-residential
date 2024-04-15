@@ -1,3 +1,5 @@
+import 'package:doss_resident/constants/cont.dart';
+import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -22,80 +24,68 @@ class SignUpOnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<SignUpOnBoardingPage> {
-  final cont=Get.put(SignUpCont());
-  final PageController _pageController = PageController();
+  final cont = Get.put(SignUpCont());
+
   int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:_currentPage==0? false:true,
+      resizeToAvoidBottomInset: _currentPage == 0 ? false : true,
       body: Background(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 2.5),
+          padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.widthMultiplier * 2.5),
           child: Column(
             children: [
               Expanded(
                 child: Stack(
                   children: [
                     Positioned(
-                      top: SizeConfig.heightMultiplier*18,
+                      top: SizeConfig.heightMultiplier * 18,
                       bottom: 0,
                       left: 0,
                       right: 0,
                       child: PageView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        controller: _pageController,
-                        itemCount:4,
+                        controller: cont.pageController,
+                        itemCount: 4,
                         onPageChanged: (int index) {
                           setState(() {
                             _currentPage = index;
                           });
                         },
                         itemBuilder: (context, index) {
-                          if(index == 0){
+                          if (index == 0) {
                             return EnterEmailPage(
-                              onTap: (){
-                                if(!cont.isEnabled.value) {
-                                  showTopSnackBar(
-                                    Overlay.of(context),
-                                    const CustomSnackBar(title: "Enter Email or Agree to Polices"),
-                                    displayDuration: const Duration(seconds: 1),
-                                  );
-                                }
-                                else{
-                                  _pageController.nextPage(
+                              onTap: () {
+                                if (!cont.isEnabled.value) {
+                                  showCustomSnackbar(
+                                      true, "Enter Email or Agree to Polices");
+                                } else {
+                                  cont.pageController.nextPage(
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOut,
                                   );
                                 }
                               },
                             );
-                          } else if(index == 1) {
-                            return   UserData(
-                              onTap: (){
-                                _pageController.nextPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
+                          } else if (index == 1) {
+                            return UserData(
+                                // onTap: () {
+                                // _pageController.nextPage(
+                                //   duration: const Duration(milliseconds: 300),
+                                //   curve: Curves.easeInOut,
+                                // );
+                                // },
                                 );
-                              },
+                          } else if (index == 2) {
+                            return SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              child: BaseAddressPage(),
                             );
-                          }
-                          else if(index==2){
-                            return Expanded(child: SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                child: BaseAddressPage(
-                                  onTap: () {
-                                     Get.back();
-                                    _pageController.nextPage(
-                                      duration: const Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  },
-                                ),),);
-                          }
-                          else if(index==3){
-                            return WatcherManPage();
+                          } else if (index == 3) {
+                            return const WatcherManPage();
                           }
                         },
                       ),
@@ -112,7 +102,8 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
                               4,
-                                  (index) => Expanded(child: buildDotIndicator(index)),
+                              (index) =>
+                                  Expanded(child: buildDotIndicator(index)),
                             ),
                           ),
                         ],
@@ -131,8 +122,9 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
   Widget buildDotIndicator(int index) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      height: SizeConfig.heightMultiplier*0.8,
-      margin:  EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*0.8),
+      height: SizeConfig.heightMultiplier * 0.8,
+      margin:
+          EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 0.8),
       decoration: BoxDecoration(
         color: _currentPage == index ? AppColors.primaryClr : AppColors.greyClr,
         borderRadius: BorderRadius.circular(5),
@@ -140,6 +132,3 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
     );
   }
 }
-
-
-

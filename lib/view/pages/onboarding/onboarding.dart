@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../ models/on_boarding.dart';
+import '../../../models/on_boarding.dart';
 import '../../../constants/colors.dart';
 import '../../../utils/size_config.dart';
 import '../../../utils/spacing.dart';
