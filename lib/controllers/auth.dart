@@ -85,7 +85,7 @@ class AuthCont extends GetxController {
         saveUserTokens(result);
         await checkStatus();
         // await getUserMoreInfoFromBackend();
-        if (isEmailCheck.value) {
+        if (!isEmailCheck.value) {
           Get.to(
             () => const BottomNavPage(),
             transition: Transition.rightToLeft,

@@ -57,19 +57,7 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
                         },
                         itemBuilder: (context, index) {
                           if (index == 0) {
-                            return EnterEmailPage(
-                              onTap: () {
-                                if (!cont.isEnabled.value) {
-                                  showCustomSnackbar(
-                                      true, "Enter Email or Agree to Polices");
-                                } else {
-                                  cont.pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                              },
-                            );
+                            return EnterEmailPage();
                           } else if (index == 1) {
                             return UserData(
                                 // onTap: () {

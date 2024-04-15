@@ -1,17 +1,26 @@
+import 'package:doss_resident/constants/colors.dart';
+import 'package:doss_resident/constants/cont.dart';
+import 'package:doss_resident/utils/size_config.dart';
+import 'package:doss_resident/utils/spacing.dart';
+import 'package:doss_resident/view/widgets/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../constants/colors.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
 import '../../../../../constants/icons.dart';
+import '../../../../../controllers/sign_in.dart';
 import '../../../../../controllers/sign_up.dart';
-import '../../../../../utils/size_config.dart';
-import '../../../../../utils/spacing.dart';
-import '../../../../widgets/auth_textfield.dart';
-import '../../../../widgets/custom_button.dart';
+import '../../../../widgets/custom_snackbar.dart';
+import '../../../terms_and_conditions/terms_and_condition.dart';
 
 class EnterEmailPage extends StatefulWidget {
-  final Function()? onTap;
-  EnterEmailPage({Key? key, this.onTap}) : super(key: key);
+  EnterEmailPage({
+    Key? key,
+    this.isEdit = false,
+  }) : super(key: key);
+  final bool isEdit;
 
   @override
   State<EnterEmailPage> createState() => _EnterEmailPageState();
@@ -39,12 +48,6 @@ class _EnterEmailPageState extends State<EnterEmailPage> {
             style: textTheme.headlineMedium,
           ).tr(),
           Spacing.y(3),
-          AuthTextField(
-            title: "Email",
-            hintText: "Enter Email",
-            controller: cont.emailController,
-          ),
-          Spacing.y(3),
           CustomCheckbox(
             title: "I agree to the",
             value: cont.termsAndPolicies.value,
@@ -52,13 +55,19 @@ class _EnterEmailPageState extends State<EnterEmailPage> {
               cont.termsAndPolicies.value = value!;
               cont.updateButtonState();
             },
-            btnTitle: 'Terms of Use and Privacy Policies',
+            btnTitle: authCont.userLanguage.value == 'Portugese'
+                ? 'Terms of Use and Privacy'
+                : 'Terms of Use and Privacy Policies',
+            description:
+                authCont.userLanguage.value == 'Portugese' ? "Policies" : "",
             onTap: () {
-              // Get.to(()=>const TermAndConditionsPage(),
-              // transition: Transition.downToUp,
-              // );
+              Get.to(
+                () => const TermAndConditionsPage(),
+                transition: Transition.downToUp,
+              );
             },
           ),
+          Spacing.y(2),
           CustomCheckbox(
             title: "I confirm that I am at least 12 years old",
             value: cont.age.value,
@@ -70,10 +79,20 @@ class _EnterEmailPageState extends State<EnterEmailPage> {
           Spacing.y(5),
           CustomButton(
             title: "Next",
-            onTap: widget.onTap,
-            isEnabled: cont.isEnabled.value,
+            onTap: () async {
+              if (cont.termsAndPolicies.value && cont.age.value) {
+                cont.pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              } else {
+                showCustomSnackbar(true, "Agree to terms and policies");
+              }
+            },
+            isEnabled: cont.termsAndPolicies.value && cont.age.value,
           ),
           Spacing.y(2),
+          Spacing.y(3),
         ],
       ),
     );
@@ -85,6 +104,7 @@ class CustomCheckbox extends StatelessWidget {
   final ValueChanged<bool?>? onChanged;
   final String title;
   final String? btnTitle;
+  final String? description;
   final Function()? onTap;
 
   const CustomCheckbox(
@@ -93,13 +113,15 @@ class CustomCheckbox extends StatelessWidget {
       required this.onChanged,
       required this.title,
       this.btnTitle,
-      this.onTap})
+      this.onTap,
+      this.description})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           color: Colors.grey,
@@ -116,24 +138,44 @@ class CustomCheckbox extends StatelessWidget {
             onChanged: onChanged,
           ),
         ),
-        Spacing.x(2),
-        Text(
-          tr(title),
-          style: textTheme.bodySmall,
-        ),
-        btnTitle == null
-            ? const SizedBox()
-            : TextButton(
-                onPressed: onTap,
-                child: SizedBox(
-                  width: SizeConfig.widthMultiplier * 60,
-                  child: Text(
-                    tr(btnTitle ?? ""),
-                    style: textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.w600),
-                  ),
+        Spacing.x(3),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tr(title),
+                  style: textTheme.bodySmall,
                 ),
-              )
+                Spacing.x(2),
+                btnTitle == null
+                    ? const SizedBox()
+                    : GestureDetector(
+                        onTap: onTap,
+                        child: Text(
+                          tr(btnTitle ?? ""),
+                          style: textTheme.bodySmall!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 3),
+                        ),
+                      ),
+              ],
+            ),
+            GestureDetector(
+              onTap: onTap,
+              child: Text(
+                tr(description ?? ""),
+                style: textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 3),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

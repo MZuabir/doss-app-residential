@@ -70,18 +70,7 @@ class _AccessPageState extends State<AccessPage> {
                   Spacing.y(9),
                   CustomButton(
                       title: "To enter", onTap: () => authCont.authorization()),
-                  Spacing.y(4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account yet?",
-                        textAlign: TextAlign.center,
-                        style: textTheme.bodyMedium,
-                      ).tr(),
-                      const CustomTextBtn(title: "Register"),
-                    ],
-                  ),
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

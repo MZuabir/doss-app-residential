@@ -1,6 +1,7 @@
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:doss_resident/view/pages/splash/splash.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -11,10 +12,10 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
-    // startLocale: ,
-      supportedLocales: [Locale('en', 'US'), Locale('pt', 'BR')],
+    startLocale: !kDebugMode?const Locale('en','US'):const Locale('pt','BR'),
+      supportedLocales: [const Locale('en', 'US'), const Locale('pt', 'BR')],
       path: 'assets/translations',
-      fallbackLocale: Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
       child: const MyApp()),);
 }
 
