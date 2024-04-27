@@ -100,7 +100,7 @@ class AuthCont extends GetxController {
         print(userInfo?.emails);
         // Get.to(()=>BottomNavPage());
       } else {
-        print("Somethig");
+        // print("Somethig");
       }
       isLoading.value = false;
     } catch (e) {

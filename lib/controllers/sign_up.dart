@@ -6,6 +6,7 @@ class SignUpCont extends GetxController {
   RxBool isEnabled = false.obs;
   RxBool termsAndPolicies = false.obs;
   RxBool age = false.obs;
+  RxInt signupTabIndex=0.obs;
 
   PageController pageController = PageController();
   @override
