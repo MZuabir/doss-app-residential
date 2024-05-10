@@ -1,15 +1,40 @@
+import 'dart:developer';
+
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:doss_resident/view/pages/splash/splash.dart';
+import 'package:doss_resident/view/widgets/custom_snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'bindings/bindings.dart';
-
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.requestPermission();
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  //////print("Handling a background message: ${message.messageId}");
+}
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await Permission.notification.request();
+  final fcm=await FirebaseMessaging.instance.getToken();
+  log(fcm.toString());
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    showCustomSnackbar(false, message.data.toString());
+    // LocalNotificationsService().showAwesomeNotification(message);
+  });
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
     startLocale: !kDebugMode?const Locale('en','US'):const Locale('pt','BR'),

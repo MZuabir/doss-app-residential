@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:validadores/Validador.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../utils/spacing.dart';
@@ -81,6 +82,22 @@ class _UserDataState extends State<UserData> {
                   onValidate: (val) {
                     if (val!.isEmpty) {
                       return tr("Please enter Document number");
+                    } else {
+                      return cont.isCpfSelected.value
+                          ? Validador()
+                              .add(Validar.CPF, msg: 'CPF Inválido')
+                              .add(Validar.OBRIGATORIO,
+                                  msg: 'Campo obrigatório')
+                              .minLength(11)
+                              .maxLength(11)
+                              .valido(val, clearNoNumber: true)
+                          : Validador()
+                              .add(Validar.CNPJ, msg: 'CPNJ Inválido')
+                              .add(Validar.OBRIGATORIO,
+                                  msg: 'Campo obrigatório')
+                              .minLength(11)
+                              .maxLength(11)
+                              .valido(val, clearNoNumber: true);
                     }
                   },
                   title: "CPF or CNPJ",

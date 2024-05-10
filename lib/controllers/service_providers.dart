@@ -17,7 +17,7 @@ class ServiceProvidersCont extends GetxController {
   Future<void> getServiceProvidersFromBackend(String zipCode) async {
     try {
       final response = await ApiService.get(
-          endPoint: '${ApiUrls.endpoint}/service-provider/zipcode/13100474',
+          endPoint: '${ApiUrls.endpoint}service-provider/zipcode/$zipCode',
           accessToken: authCont.accessToken.value);
       log(response!.body);
       _serviceProviders.value =

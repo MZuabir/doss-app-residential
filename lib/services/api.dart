@@ -25,10 +25,11 @@ class ApiService {
                 'Authorization': "Bearer $accessToken",
               },
         body: body == null ? null : jsonEncode(body));
+    log(endPoint.toString());
 
+    log(response!.body.toString());
     if (response.body.isNotEmpty) {
       final jsonData = jsonDecode(response.body);
-      
     }
 
     return response;
@@ -48,8 +49,6 @@ class ApiService {
                 'Authorization': "Bearer $accessToken",
               });
 
-   
-   
     // if (response.statusCode == 200) {
     //   return response;
     // }

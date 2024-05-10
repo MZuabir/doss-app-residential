@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99940522863",
+    "project_id": "doss-app-residential",
+    "storage_bucket": "doss-app-residential.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99940522863:android:e52145d29e11159b7f669a",
+        "android_client_info": {
+          "package_name": "br.com.doss.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxT53PaU7o1fvMi-x9Rh_TTt_-HYA2EtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:doss_resident/controllers/sign_up.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +20,7 @@ class UserDataCont extends GetxController {
   //SIGNUP CONTROLLERS
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
-  TextEditingController document = TextEditingController();
+  TextEditingController document = TextEditingController(text: kDebugMode?"99363624544":null);
   RxBool isCpfSelected = true.obs;
   RxBool isCpnjSelected = false.obs;
   final FocusNode nameNode = FocusNode();
@@ -33,18 +35,22 @@ class UserDataCont extends GetxController {
         "name": name.text,
         "document": document.text,
         "phone": phone.text,
-        "photo": base64Image,
+        'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
+        "photo": "base64",
       };
+      log(body.toString());
 
       if (formKey.currentState!.validate() && base64Image != "") {
         authCont.isLoading.value = true;
 
         final response = await ApiService.post(
-          endPoint:
-              '${ApiUrls.endpoint}residential/onboard/user-information', accessToken: authCont.accessToken.value,
+          endPoint: '${ApiUrls.endpoint}residential/onboard/user-information',
+          accessToken: authCont.accessToken.value,
           body: body,
           isAuth: false,
         );
+        log(response!.statusCode.toString());
+        log(response!.body.toString());
 
         if (response != null) {
           final responseBody = jsonDecode(response.body);
@@ -68,7 +74,7 @@ class UserDataCont extends GetxController {
       }
     } catch (e) {
       authCont.isLoading.value = false;
-      // print(e);
+      log(e.toString());
       showCustomSnackbar(true, "Something went wrong");
     }
   }

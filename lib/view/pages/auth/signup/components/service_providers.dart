@@ -26,7 +26,7 @@ class ServiceProvidersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cont = Get.put(ServiceProvidersCont());
     final addressCont = Get.find<BaseAddressCont>();
-   
+
     final textTheme = Theme.of(context).textTheme;
     return Column(
       children: [

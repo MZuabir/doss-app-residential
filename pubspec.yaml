@@ -55,6 +55,12 @@ dependencies:
   url_launcher: ^6.2.4
   flutter_launcher_icons: ^0.9.2
   intl:
+  firebase_core: ^2.13.0
+  firebase_messaging: ^14.6.1
+  permission_handler: ^11.3.0
+  webview_flutter: 
+  validadores: ^1.0.9
+
 
 dev_dependencies:
   flutter_test:

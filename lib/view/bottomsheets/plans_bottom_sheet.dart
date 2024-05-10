@@ -175,7 +175,7 @@ class _PlansBottomSheetState extends State<PlansBottomSheet> {
                       CustomButton(
                         isLoading: cont.isLoading.value,
                         title: tr('Continue to payment'),
-                        onTap: () => cont.getPaymentLink(),
+                        onTap: () => cont.getPaymentLink(widget.sID),
                       ),
                       Spacing.y(2),
                       CustomTextBtn(
