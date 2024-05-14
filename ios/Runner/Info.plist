@@ -44,6 +44,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Need to upload image</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide you with nearby restaurant recommendations.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need to upload image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -52,7 +54,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>processing</string>
+		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -72,8 +74,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to provide you with nearby restaurant recommendations.</string>
-	
 </dict>
 </plist>
