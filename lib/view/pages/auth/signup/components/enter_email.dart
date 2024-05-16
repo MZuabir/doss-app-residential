@@ -43,10 +43,7 @@ class _EnterEmailPageState extends State<EnterEmailPage> {
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Enter your email",
-            style: textTheme.headlineMedium,
-          ).tr(),
+        
           Spacing.y(3),
           CustomCheckbox(
             title: "I agree to the",

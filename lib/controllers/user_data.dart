@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:doss_resident/controllers/sign_up.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,8 @@ class UserDataCont extends GetxController {
   //SIGNUP CONTROLLERS
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
-  TextEditingController document = TextEditingController(text: kDebugMode?"99363624544":null);
+  TextEditingController document =
+      TextEditingController(text: kDebugMode ? "99363624544" : null);
   RxBool isCpfSelected = true.obs;
   RxBool isCpnjSelected = false.obs;
   final FocusNode nameNode = FocusNode();
@@ -31,18 +33,18 @@ class UserDataCont extends GetxController {
 
   Future<void> postUserData() async {
     try {
-      final body = {
-        "name": name.text,
-        "document": document.text,
-        "phone": phone.text,
-        'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
-        "photo": "base64",
-      };
-      log(body.toString());
-
       if (formKey.currentState!.validate() && base64Image != "") {
         authCont.isLoading.value = true;
-
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        final body = {
+          "name": name.text,
+          "document": document.text,
+          "phone": phone.text,
+          'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
+          "photo": base64Image,
+          "termsAccept": {"termsAccept": true, "IAmOver12YearsOld": true}
+        };
+        log(body.toString());
         final response = await ApiService.post(
           endPoint: '${ApiUrls.endpoint}residential/onboard/user-information',
           accessToken: authCont.accessToken.value,
