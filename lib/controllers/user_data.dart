@@ -41,7 +41,7 @@ class UserDataCont extends GetxController {
           "document": document.text,
           "phone": phone.text,
           'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
-          "photo": base64Image,
+          "photo": "base64Image",
           "termsAccept": {"termsAccept": true, "IAmOver12YearsOld": true}
         };
         log(body.toString());

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:doss_resident/controllers/sign_up.dart';
 import 'package:doss_resident/services/zipcode.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,10 @@ class BaseAddressCont extends GetxController {
         "zipCode": zipCode.text,
         "number": number.text,
       };
+    
       authCont.isLoading.value = true;
       final response = await ApiService.post(
-        endPoint: '${ApiUrls.endpoint}service-provider/onboard/address',
+        endPoint: '${ApiUrls.endpoint}residential/onboard/address',
         accessToken: authCont.accessToken.value,
         body: body,
         isAuth: false,
@@ -54,6 +56,7 @@ class BaseAddressCont extends GetxController {
       if (response != null) {
         final responseBody = jsonDecode(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
+            log("RESPONSE NEW ${response.body}".toString());
           cont.pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,

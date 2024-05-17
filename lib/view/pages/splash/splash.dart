@@ -46,10 +46,17 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _navigateToNextScreen() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool isGoHome = prefs.getBool(LocalDBconstants.isGoHome) ?? false;
     await Future.delayed(const Duration(seconds: 2));
     await authCont.checkStatus();
     if (authCont.isEmailCheck.value == true) {
-      Get.off(() => const SignUpOnBoardingPage(), transition: Transition.rightToLeft);
+      if (isGoHome) {
+        Get.off(() => const BottomNavPage());
+      } else {
+        Get.off(() => const SignUpOnBoardingPage(),
+            transition: Transition.rightToLeft);
+      }
     } else {
       // Get.off(() => const SignUpOnBoardingPage(),transition: Transition.rightToLeft);
       Get.off(() => const OnBoardingPage(), transition: Transition.rightToLeft);

@@ -31,10 +31,7 @@ void main() async{
   await Permission.notification.request();
   final fcm=await FirebaseMessaging.instance.getToken();
   log(fcm.toString());
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    showCustomSnackbar(false, message.data.toString());
-    // LocalNotificationsService().showAwesomeNotification(message);
-  });
+  
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
     startLocale: !kDebugMode?const Locale('en','US'):const Locale('pt','BR'),
