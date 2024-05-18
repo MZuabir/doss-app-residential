@@ -34,7 +34,7 @@ void main() async{
   
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
-    startLocale: !kDebugMode?const Locale('en','US'):const Locale('pt','BR'),
+    startLocale: kDebugMode?const Locale('en','US'):const Locale('pt','BR'),
       supportedLocales: [const Locale('en', 'US'), const Locale('pt', 'BR')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
