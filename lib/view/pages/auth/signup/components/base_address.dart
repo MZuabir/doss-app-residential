@@ -75,7 +75,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                         // Check if the value matches the Brazilian zip code format
                       },
                       title: "Zip Code",
-                      hintText: "13100-474",
+                      hintText: "Enter zip code",
                       controller: cont.zipCode,
                       keyboardType: const TextInputType.numberWithOptions(
                           signed: true, decimal: true),
@@ -103,39 +103,39 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                   isEnable: false,
                   focusNode: cont.countryNode,
                   title: "Country",
-                  hintText: "Brazil",
+                  hintText: "Country",
                   controller: cont.country,
                 ),
                 AuthTextField(
                   isEnable: false,
                   title: "State",
-                  hintText: "São Paulo estado",
+                  hintText: "State",
                   controller: cont.state,
                 ),
                 AuthTextField(
                   isEnable: false,
                   focusNode: cont.cityNode,
                   title: "City",
-                  hintText: "Sao Paulo",
+                  hintText: "City",
                   controller: cont.city,
                 ),
                 AuthTextField(
                   isEnable: false,
                   focusNode: cont.streetNode,
                   title: "Road",
-                  hintText: "xyz",
+                  hintText: "Road",
                   controller: cont.street,
                 ),
                 AuthTextField(
                   // isEnable: false,
                   title: "Complement",
-                  hintText: "xyz",
+                  hintText: "Enter Complement",
                   controller: cont.complement,
                 ),
                 AuthTextField(
                   focusNode: cont.numberNode,
-                  title: "N°",
-                  hintText: "000000000",
+                  title: "Number Residencial",
+                  hintText: "Number Residencial",
                   onValidate: (val) {
                     if (val!.isEmpty) {
                       return tr('Please enter N°');

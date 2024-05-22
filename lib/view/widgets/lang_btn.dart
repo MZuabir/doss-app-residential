@@ -43,7 +43,7 @@ class SelectLangButton extends GetWidget<AuthCont> {
                 ),
               ),
               SizedBox(width: SizeConfig.widthMultiplier * 2),
-              Text(controller.userLanguage.value,
+              Text(controller.userLanguage.value=='Portugese'?"Português":controller.userLanguage.value,
                   style: textTheme.labelSmall!.copyWith(color: Colors.white)),
               const Icon(Icons.arrow_drop_down_rounded, color: Colors.white)
             ],

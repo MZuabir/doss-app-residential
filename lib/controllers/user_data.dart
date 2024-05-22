@@ -17,12 +17,13 @@ import '../view/widgets/custom_snackbar.dart';
 class UserDataCont extends GetxController {
   final cont = Get.find<SignUpCont>();
   //FORM KEY
-  final formKey = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   //SIGNUP CONTROLLERS
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController document =
-      TextEditingController(text: kDebugMode ? "99363624544" : null);
+      //
+      TextEditingController(text: kDebugMode ? "99363624544" : "");
   RxBool isCpfSelected = true.obs;
   RxBool isCpnjSelected = false.obs;
   final FocusNode nameNode = FocusNode();
@@ -33,15 +34,21 @@ class UserDataCont extends GetxController {
 
   Future<void> postUserData() async {
     try {
-      if (formKey.currentState!.validate() && base64Image != "") {
+      log("message");
+      if (base64Image == "") {
+        showCustomSnackbar(true, "Please Select Image");
+        return;
+      }
+      if (formKey.currentState?.validate() ?? false) {
         authCont.isLoading.value = true;
+        log("message2");
         final fcmToken = await FirebaseMessaging.instance.getToken();
         final body = {
           "name": name.text,
           "document": document.text,
           "phone": phone.text,
           'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
-          "photo": "base64Image",
+          "photo": base64Image,
           "termsAccept": {"termsAccept": true, "IAmOver12YearsOld": true}
         };
         log(body.toString());
@@ -71,9 +78,7 @@ class UserDataCont extends GetxController {
           showCustomSnackbar(true, "Something went wrong");
         }
         authCont.isLoading.value = false;
-      } else {
-        showCustomSnackbar(true, "Please Select Image");
-      }
+      } else {}
     } catch (e) {
       authCont.isLoading.value = false;
       log(e.toString());

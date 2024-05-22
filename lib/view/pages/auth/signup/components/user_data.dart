@@ -83,27 +83,40 @@ class _UserDataState extends State<UserData> {
                     if (val!.isEmpty) {
                       return tr("Please enter Document number");
                     } else {
-                      return cont.isCpfSelected.value
+                      // String? validation = ;
+                      //   print("object");
+                      // return validation == null
+                      //     ? "Invalid"
+                      //     : validation.contains(",")
+                      //         ? validation.split(",")[1].trim().split("]")[0]
+                      //         : validation
+                      //             .replaceAll("[", "")
+                      //             .replaceAll("]", "");
+                      String? validation = cont.isCpfSelected.value
                           ? Validador()
                               .add(Validar.CPF, msg: 'CPF Inválido')
-                              .add(Validar.OBRIGATORIO,
-                                  msg: 'Campo obrigatório')
+                              .add(Validar.OBRIGATORIO, msg: 'xyz')
                               .minLength(11)
                               .maxLength(11)
                               .valido(val, clearNoNumber: true)
                           : Validador()
-                              .add(Validar.CNPJ, msg: 'CPNJ Inválido')
-                              .add(Validar.OBRIGATORIO,
-                                  msg: 'Campo obrigatório')
+                              .add(Validar.CNPJ, msg: 'CNPJ Inválido')
+                              .add(Validar.OBRIGATORIO, msg: 'xyz')
                               .minLength(11)
                               .maxLength(11)
                               .valido(val, clearNoNumber: true);
+                      if (validation == null) {
+                        return null;
+                      } else {
+                        return validation
+                            .replaceAll("[", "")
+                            .replaceAll("]", "");
+                      }
+                      ;
                     }
                   },
                   title: "CPF or CNPJ",
-                  hintText: cont.isCpfSelected.value
-                      ? "314.356.008-86"
-                      : "70.300.462/0001-00",
+                  hintText: "Enter your document",
                   controller: cont.document,
                   keyboardType: TextInputType.number,
                 ),
@@ -172,7 +185,7 @@ class _UserDataState extends State<UserData> {
                         ),
                         Spacing.x(5),
                         Text(
-                          "CPNJ",
+                          "CNPJ",
                           style: textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.w600),
                         ),
@@ -200,8 +213,8 @@ class _UserDataState extends State<UserData> {
                       return tr("Please enter phone number");
                     }
                   },
-                  title: "Cell",
-                  hintText: "11 9999-9999",
+                  title: tr("Cell"),
+                  hintText: "Enter your cell number",
                   controller: cont.phone,
                   keyboardType: TextInputType.number,
                 ),
