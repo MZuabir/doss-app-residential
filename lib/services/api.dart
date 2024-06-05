@@ -20,14 +20,14 @@ class ApiService {
         headers: isAuth
             ? _authheader
             : {
-                'accept': 'application/json',
-                'Content-Type': 'application/json',
+                // 'accept': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': "Bearer $accessToken",
               },
-        body: body == null ? null : jsonEncode(body));
+        body: body);
     log(endPoint.toString());
 
-    log(response!.body.toString());
+    log(response!.statusCode.toString());
     if (response.body.isNotEmpty) {
       final jsonData = jsonDecode(response.body);
     }
@@ -40,14 +40,17 @@ class ApiService {
       required String accessToken,
       bool isAuth = false}) async {
     log(endPoint);
+   
     final response = await http.get(Uri.parse(endPoint),
-        headers: isAuth
-            ? _authheader
-            : {
-                'accept': 'application/json',
-                'Content-Type': 'application/json',
+        headers: {
+                // 'accept': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': "Bearer $accessToken",
               });
+
+log("RESPONSE"+ response.statusCode.toString());
+log("RESPONSE BODY"+ response.body);
+
 
     // if (response.statusCode == 200) {
     //   return response;

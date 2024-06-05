@@ -246,5 +246,8 @@
     "Photo":"Photo",
     "confirm":"confirm",
     "Go back":"Go back",
-    "Logout":"Logout"
+    "Logout":"Logout",
+    "Please enter your address name":"Please enter your address name",
+    "Address Name":"Address Name",
+    "Enter your address name":"Enter your address name"
 }

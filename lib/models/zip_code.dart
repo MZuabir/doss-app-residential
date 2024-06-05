@@ -1,99 +1,97 @@
+// To parse this JSON data, do
+//
+//     final zipCodeModel = zipCodeModelFromJson(jsonString);
+
+import 'dart:convert';
+
+ZipCodeModel zipCodeModelFromJson(String str) => ZipCodeModel.fromJson(json.decode(str));
+
+String zipCodeModelToJson(ZipCodeModel data) => json.encode(data.toJson());
+
 class ZipCodeModel {
-  Data? data;
-  bool? success;
+    City city;
+    State state;
+    double altitude;
+    double latitude;
+    double longitude;
+    String neighborhood;
+    String complement;
+    String code;
+    String street;
 
-  ZipCodeModel({this.data, this.success});
+    ZipCodeModel({
+        required this.city,
+        required this.state,
+        required this.altitude,
+        required this.latitude,
+        required this.longitude,
+        required this.neighborhood,
+        required this.complement,
+        required this.code,
+        required this.street,
+    });
 
-  ZipCodeModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
-    success = json['success'];
-  }
+    factory ZipCodeModel.fromJson(Map<String, dynamic> json) => ZipCodeModel(
+        city: City.fromJson(json["city"]),
+        state: State.fromJson(json["state"]),
+        altitude: json["altitude"]?.toDouble(),
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
+        neighborhood: json["neighborhood"],
+        complement: json["complement"],
+        code: json["code"],
+        street: json["street"],
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['success'] = this.success;
-    return data;
-  }
-}
-
-class Data {
-  City? city;
-  State? state;
-  String? neighborhood;
-  String? complement;
-  String? code;
-  String? street;
-
-  Data(
-      {this.city,
-      this.state,
-      this.neighborhood,
-      this.complement,
-      this.code,
-      this.street});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    city = json['city'] != null ?  City.fromJson(json['city']) : null;
-    state = json['state'] != null ?  State.fromJson(json['state']) : null;
-    neighborhood = json['neighborhood'];
-    complement = json['complement'];
-    code = json['code'];
-    street = json['street'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.city != null) {
-      data['city'] = this.city!.toJson();
-    }
-    if (this.state != null) {
-      data['state'] = this.state!.toJson();
-    }
-    data['neighborhood'] = this.neighborhood;
-    data['complement'] = this.complement;
-    data['code'] = this.code;
-    data['street'] = this.street;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "city": city.toJson(),
+        "state": state.toJson(),
+        "altitude": altitude,
+        "latitude": latitude,
+        "longitude": longitude,
+        "neighborhood": neighborhood,
+        "complement": complement,
+        "code": code,
+        "street": street,
+    };
 }
 
 class City {
-  String? ibge;
-  String? name;
-  int? ddd;
+    String ibge;
+    String name;
+    int ddd;
 
-  City({this.ibge, this.name, this.ddd});
+    City({
+        required this.ibge,
+        required this.name,
+        required this.ddd,
+    });
 
-  City.fromJson(Map<String, dynamic> json) {
-    ibge = json['ibge'];
-    name = json['name'];
-    ddd = json['ddd'];
-  }
+    factory City.fromJson(Map<String, dynamic> json) => City(
+        ibge: json["ibge"],
+        name: json["name"],
+        ddd: json["ddd"],
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ibge'] = this.ibge;
-    data['name'] = this.name;
-    data['ddd'] = this.ddd;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "ibge": ibge,
+        "name": name,
+        "ddd": ddd,
+    };
 }
 
 class State {
-  String? sigla;
+    String sigla;
 
-  State({this.sigla});
+    State({
+        required this.sigla,
+    });
 
-  State.fromJson(Map<String, dynamic> json) {
-    sigla = json['sigla'];
-  }
+    factory State.fromJson(Map<String, dynamic> json) => State(
+        sigla: json["sigla"],
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sigla'] = this.sigla;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "sigla": sigla,
+    };
 }

@@ -42,7 +42,7 @@ class _PlansBottomSheetState extends State<PlansBottomSheet> {
       child: Obx(
         () => cont.plans == null
             ? LoadingWidget(height: SizeConfig.heightMultiplier * 70)
-            : cont.plans!.data.plans.isEmpty
+            : cont.plans!.isEmpty
                 ? const Center(
                     child: Text('No Plans Found!'),
                   )
@@ -77,9 +77,9 @@ class _PlansBottomSheetState extends State<PlansBottomSheet> {
                         width: SizeConfig.widthMultiplier * 100,
                         child: Column(
                           children: [
-                            ...List.generate(cont.plans!.data!.plans!.length,
+                            ...List.generate(cont.plans!.length,
                                 (index) {
-                              final data = cont.plans!.data!.plans![index];
+                              final data = cont.plans![index];
                               return GestureDetector(
                                 onTap: () {
                                   cont.selectedPlan.value = index;
@@ -107,7 +107,7 @@ class _PlansBottomSheetState extends State<PlansBottomSheet> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            data.description,
+                                            data.description!,
                                             style: textTheme.bodyMedium,
                                           ).tr(),
                                           AnimatedContainer(

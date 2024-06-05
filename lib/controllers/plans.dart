@@ -13,19 +13,25 @@ import 'package:get/get.dart';
 class PlansCont extends GetxController {
   RxInt selectedPlan = 0.obs;
   RxBool isLoading = false.obs;
-  final Rxn<PlansModel> _plans = Rxn<PlansModel>();
-  PlansModel? get plans => _plans.value;
+  final Rxn<List<PlansModel>> _plans = Rxn<List<PlansModel>>();
+  List<PlansModel>? get plans => _plans.value;
 
-  Future<void> getPlans(String serviceProviderID) async {
+  Future<void> getPlans(String workPlaceID) async {
     try {
       _plans.value = null;
       final response = await ApiService.get(
           endPoint:
-              '${ApiUrls.endpoint}/service-provider/$serviceProviderID/plans',
+              '${ApiUrls.endpoint}service-provider/plans/$workPlaceID',
           accessToken: authCont.accessToken.value);
-      log(response!.body);
-      _plans.value = PlansModel.fromJson(jsonDecode(response.body));
+          _plans.value=[];
+          final  body=jsonDecode(response!.body);
+      log(body.toString());
+      body.forEach((element){
+        _plans.value!.add(PlansModel.fromJson(element));
+      });
+   
     } catch (e) {
+      log(e.toString());
       showCustomSnackbar(true, "Something went wrong");
     }
   }
@@ -36,7 +42,7 @@ class PlansCont extends GetxController {
       isLoading.value = true;
       final fcmToken = await FirebaseMessaging.instance.getToken();
 
-      String planID = plans!.data.plans[selectedPlan.value].id;
+      String planID = _plans.value![selectedPlan.value].id!;
       final body = {"tokenId": fcmToken, "planId": planID};
      
       final response = await ApiService.post(

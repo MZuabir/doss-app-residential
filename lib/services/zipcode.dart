@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:doss_resident/constants/api.dart';
 import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/models/zip_code.dart';
@@ -13,6 +14,7 @@ class ZipCodeService {
         isAuth: false,
         accessToken: authCont.accessToken.value,
       );
+     
       if (response != null) {
         final responseBody = jsonDecode(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {

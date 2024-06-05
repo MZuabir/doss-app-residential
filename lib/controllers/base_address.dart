@@ -26,6 +26,8 @@ class BaseAddressCont extends GetxController {
   TextEditingController state = TextEditingController();
 
   TextEditingController zipCode = TextEditingController();
+  TextEditingController addressName = TextEditingController();
+  String neighborhood='';
   TextEditingController complement = TextEditingController();
   final FocusNode numberNode = FocusNode();
   final FocusNode countryNode = FocusNode();
@@ -37,14 +39,20 @@ class BaseAddressCont extends GetxController {
   Future<void> postBaseAddress() async {
     try {
       final body = {
+        "homePlaceId": "",
+        "homePlaceName": addressName.text,
+        "selectHomePlaceDefault": "true",
         "country": country.text,
         "state": state.text,
         "city": city.text,
         "street": street.text,
         "complement": complement.text,
         "zipCode": zipCode.text,
+        "neighborhood": neighborhood,
         "number": number.text,
       };
+
+      log(body.toString());
     
       authCont.isLoading.value = true;
       final response = await ApiService.post(
@@ -73,7 +81,7 @@ class BaseAddressCont extends GetxController {
       authCont.isLoading.value = false;
     } catch (e) {
       authCont.isLoading.value = false;
-      // print(e);
+      print(e);
       showCustomSnackbar(true, "Something went wrong");
     }
   }
@@ -83,13 +91,16 @@ class BaseAddressCont extends GetxController {
       isCheckingZipCode.value = true;
       final model = await ZipCodeService.getZipCodeDetails(val);
       if (model != null) {
-        state.text = model.data!.state!.sigla!;
-        city.text = model.data!.city!.name!;
-        street.text = model.data!.street!;
-        complement.text = model.data!.complement!;
+        state.text = model.state.sigla;
+        city.text = model.city.name;
+        neighborhood = model.neighborhood;
+        street.text = model.street;
+        complement.text = model.complement;
         country.text = 'Brazil';
       }
+      log("NEIGHTBORHOOD $neighborhood");
     } catch (e) {
+      showCustomSnackbar(true, "Something went wrong");
     } finally {
       isCheckingZipCode.value = false;
     }

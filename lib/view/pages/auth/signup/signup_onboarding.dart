@@ -17,15 +17,20 @@ import 'components/user_data.dart';
 import 'components/service_providers.dart';
 
 class SignUpOnBoardingPage extends StatefulWidget {
-  const SignUpOnBoardingPage({Key? key}) : super(key: key);
-
+  const SignUpOnBoardingPage({Key? key, required this.index}) : super(key: key);
+final int index;
   @override
   State<SignUpOnBoardingPage> createState() => _OnBoardingState();
 }
 
 class _OnBoardingState extends State<SignUpOnBoardingPage> {
   final cont = Get.put(SignUpCont());
-
+@override
+  void initState() {
+    super.initState();
+    cont.pageController=PageController(initialPage: widget.index);
+    cont.signupTabIndex.value=widget.index;
+  }
   @override
   Widget build(BuildContext context) {
     return Obx(

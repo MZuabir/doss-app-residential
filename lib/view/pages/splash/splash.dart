@@ -5,6 +5,7 @@ import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/constants/local_db.dart';
 import 'package:doss_resident/view/pages/auth/signup/signup_onboarding.dart';
 import 'package:doss_resident/view/pages/bottomnav/bottom_nav_bar.dart';
+import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,18 +50,29 @@ class _SplashPageState extends State<SplashPage> {
     final prefs = await SharedPreferences.getInstance();
     bool isGoHome = prefs.getBool(LocalDBconstants.isGoHome) ?? false;
     await Future.delayed(const Duration(seconds: 2));
-    await authCont.checkStatus();
-    if (authCont.isEmailCheck.value == true) {
-      if (isGoHome) {
-        Get.off(() => const BottomNavPage());
-      } else {
-        Get.off(() => const SignUpOnBoardingPage(),
-            transition: Transition.rightToLeft);
-      }
-    } else {
-      // Get.off(() => const SignUpOnBoardingPage(),transition: Transition.rightToLeft);
-      Get.off(() => const OnBoardingPage(), transition: Transition.rightToLeft);
+    int selectedPage = await authCont.checkStatus();
+    if(isGoHome){
+      Get.off(() => const BottomNavPage());
     }
+   else{ if(authCont.accessToken.value==''){
+        Get.off(() => const OnBoardingPage(),
+            transition: Transition.rightToLeft);
+   }else{
+         Get.off(() => SignUpOnBoardingPage(index: selectedPage),
+            transition: Transition.rightToLeft);
+   }
+    }
+    // if (authCont.isEmailCheck.value == true) {
+    //   if (isGoHome) {
+    //     Get.off(() => const BottomNavPage());
+    //   } else {
+    //     Get.off(() => const SignUpOnBoardingPage(),
+    //         transition: Transition.rightToLeft);
+    //   }
+    // } else {
+    //   // Get.off(() => const SignUpOnBoardingPage(),transition: Transition.rightToLeft);
+    //  
+    // }
     // print(isEmailCheck.value);
 
     // Get.off(()=> const AccessPage(),);
@@ -91,6 +103,8 @@ class _SplashPageState extends State<SplashPage> {
               textAlign: TextAlign.center,
               style: textTheme.bodySmall,
             ).tr(),
+              Spacing.y(2),
+            LoadingWidget(height: SizeConfig.heightMultiplier*6)
           ],
         ),
       ),

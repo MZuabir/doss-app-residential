@@ -49,6 +49,7 @@ class UserDataCont extends GetxController {
           "phone": phone.text,
           'typeDocument': isCpfSelected.value ? "CPF" : "CPNJ",
           "photo": base64Image,
+          "mobileTokenId": fcmToken,
           "termsAccept": {"termsAccept": true, "IAmOver12YearsOld": true}
         };
         log(body.toString());

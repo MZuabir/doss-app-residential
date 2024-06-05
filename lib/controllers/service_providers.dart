@@ -10,19 +10,28 @@ import 'package:doss_resident/view/widgets/custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class ServiceProvidersCont extends GetxController {
-  final Rxn<ServiceProvidersModel> _serviceProviders =
-      Rxn<ServiceProvidersModel>();
-  ServiceProvidersModel? get serviceProviders => _serviceProviders.value;
+  final Rxn<List<ServiceProvidersModel>> _serviceProviders =
+      Rxn<List<ServiceProvidersModel>>();
+  List<ServiceProvidersModel>? get serviceProviders => _serviceProviders.value;
 
   Future<void> getServiceProvidersFromBackend(String zipCode) async {
     try {
+     if(zipCode.isEmpty){
+      zipCode=authCont.onboardUserInfo.value!.addresses!.zipCode!;
+     }
       final response = await ApiService.get(
           endPoint: '${ApiUrls.endpoint}service-provider/zipcode/$zipCode',
           accessToken: authCont.accessToken.value);
+      _serviceProviders.value = [];
       log(response!.body);
-      _serviceProviders.value =
-          ServiceProvidersModel.fromJson(jsonDecode(response.body));
+      final body=jsonDecode(response.body);
+      body.forEach((element){
+_serviceProviders.value!.add(ServiceProvidersModel.fromJson(element));
+      });
+       
+          
     } catch (e) {
+      log(e.toString());
       showCustomSnackbar(true, "Something went wrong");
     }
   }

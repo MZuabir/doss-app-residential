@@ -25,7 +25,7 @@ class ServiceProvidersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cont = Get.put(ServiceProvidersCont());
-    final addressCont = Get.find<BaseAddressCont>();
+    final addressCont = Get.put(BaseAddressCont());
 
     final textTheme = Theme.of(context).textTheme;
     return Column(
@@ -45,18 +45,19 @@ class ServiceProvidersPage extends StatelessWidget {
             height: SizeConfig.heightMultiplier * 42,
             child: cont.serviceProviders == null
                 ? LoadingWidget(height: SizeConfig.heightMultiplier * 42)
-                : cont.serviceProviders!.data.isEmpty
+                : cont.serviceProviders!.isEmpty
                     ? const Center(
                         child: Text("No Service Providers Yet"),
                       )
                     : ListView.builder(
-                        itemCount: cont.serviceProviders!.data!.length,
+                        itemCount: cont.serviceProviders!.length,
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           return ServiceProvidersTile(
-                            model: cont.serviceProviders!.data![index],
+                            model: cont.serviceProviders![index].serviceProvider!,
+                            plan: cont.serviceProviders![index].plan!,
                           );
                         },
                       ),
@@ -68,8 +69,11 @@ class ServiceProvidersPage extends StatelessWidget {
 }
 
 class ServiceProvidersTile extends StatelessWidget {
-  const ServiceProvidersTile({Key? key, required this.model}) : super(key: key);
-  final ServiceProvidersDataModel model;
+  const ServiceProvidersTile(
+      {Key? key, required this.model, required this.plan})
+      : super(key: key);
+  final ServiceProvider model;
+  final Plan plan;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -88,9 +92,9 @@ class ServiceProvidersTile extends StatelessWidget {
             width: SizeConfig.widthMultiplier * 60,
             child: CachedNetworkImage(
               placeholder: (_, p) => const Center(
-                child: const CupertinoActivityIndicator(color: Colors.grey),
+                child:  CupertinoActivityIndicator(color: Colors.grey),
               ),
-              imageUrl: model.serviceProvider!.photoUrl,
+              imageUrl: model!.photoUrl??"",
               imageBuilder: (_, o) => Container(
                 height: SizeConfig.heightMultiplier * 25,
                 width: SizeConfig.widthMultiplier * 60,
@@ -117,7 +121,7 @@ class ServiceProvidersTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model.serviceProvider!.name.capitalize!,
+                  model!.name!.capitalize!,
                   style: textTheme.bodyMedium,
                 ),
                 Spacing.y(2),
@@ -130,7 +134,7 @@ class ServiceProvidersTile extends StatelessWidget {
                     ).tr(),
                     Spacing.x(2),
                     Text(
-                      numberFormat.format(model.plan!.price),
+                      numberFormat.format(plan.price),
                       style: textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColors.primaryClr),
@@ -142,7 +146,7 @@ class ServiceProvidersTile extends StatelessWidget {
                     height: SizeConfig.heightMultiplier * 4,
                     title: "View Plan",
                     onTap: () {
-                      _showBottomSheet(context, model.serviceProvider.id);
+                      _showBottomSheet(context, model.workPlaceId!);
                     })
               ],
             ),

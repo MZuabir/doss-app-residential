@@ -48,9 +48,26 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                   style: textTheme.headlineMedium,
                 ).tr(),
                 Spacing.y(3),
+                 AuthTextField(
+                 
+      
+                    
+                      onValidate: (val) {
+                        if (val == null || val.isEmpty) {
+                          return tr("Please enter your address name");
+                        }
+        
+                        // Check if the value matches the Brazilian zip code format
+                      },
+                      title: "Address Name",
+                      hintText: "Enter your address name",
+                      controller: cont.addressName,
+                 
+                ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
+                    
                     AuthTextField(
                       focusNode: cont.zipCodeNode,
                       formatter: [MaskTextInputFormatter(mask: "#####-###")],
@@ -142,7 +159,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                     }
                   },
                   controller: cont.number,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                 ),
                 CustomButton(
                     title: "Next",
@@ -155,7 +172,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                           cont.country.text.isNotEmpty &&
                           cont.city.text.isNotEmpty &&
                           cont.street.text.isNotEmpty &&
-                          cont.state.text.isNotEmpty) {
+                          cont.state.text.isNotEmpty && cont.addressName.text.isNotEmpty) {
                         await cont.postBaseAddress();
                       } else {
                        

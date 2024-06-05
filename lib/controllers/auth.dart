@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+import 'package:doss_resident/models/onboard_userinfo.dart';
 import 'package:doss_resident/models/user_model.dart';
 import 'package:doss_resident/models/user_more_info.dart';
 import 'package:doss_resident/constants/api.dart';
@@ -10,6 +11,7 @@ import 'package:doss_resident/view/pages/bottomnav/bottom_nav_bar.dart';
 import 'package:doss_resident/view/pages/onboarding/onboarding.dart';
 import 'package:doss_resident/view/widgets/custom_snackbar.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,7 @@ import '../constants/local_db.dart';
 import '../view/pages/auth/signup/signup_onboarding.dart';
 
 class AuthCont extends GetxController {
+  Rxn<OnboardUserInfoModel> onboardUserInfo=Rxn<OnboardUserInfoModel>();
   RxInt bnbIndex = 0.obs;
   RxBool isOnline = false.obs;
   RxBool isEmailCheck=false.obs;
@@ -83,19 +86,19 @@ class AuthCont extends GetxController {
       if (result != null) {
         accessToken.value = result.accessToken!;
         saveUserTokens(result);
-        await checkStatus();
+       int selectedPage= await checkStatus();
         // await getUserMoreInfoFromBackend();
-        if (!isEmailCheck.value) {
+ 
+          // Get.to(
+          //   () => const BottomNavPage(),
+          //   transition: Transition.rightToLeft,
+          // );
+       
           Get.to(
-            () => const BottomNavPage(),
+            () => SignUpOnBoardingPage(index: selectedPage),
             transition: Transition.rightToLeft,
-          );
-        } else {
-          Get.to(
-            () => const SignUpOnBoardingPage(),
-            transition: Transition.rightToLeft,
-          );
-        }
+        );
+        
         log("XXX ${accessToken.value}");
         print(userInfo?.emails);
         // Get.to(()=>BottomNavPage());
@@ -179,41 +182,67 @@ class AuthCont extends GetxController {
     }
   }
 
-  Future<void> checkStatus() async {
+  Future<int> checkStatus() async {
     try {
+     
       final response = await ApiService.get(
-        endPoint: '${ApiUrls.endpoint}residential/check',
-        accessToken: accessToken.value,
-        isAuth: false,
-      );
-      log(response!.statusCode.toString());
-
-      // Check for an empty or malformed response body
-      if (response != null && response.body.isNotEmpty) {
-        if (response.statusCode == 200) {
-          // Try to decode the JSON response
-          try {
-            final jsonData = jsonDecode(response.body);
-            isEmailCheck.value = jsonData['success'];
-          } catch (e) {
-            print("Error decoding JSON: ${e.toString()}");
-            showCustomSnackbar(true, "Invalid JSON format");
-          }
-        } else {
-          showCustomSnackbar(true, "Something went wrong");
+          endPoint: '${ApiUrls.endpoint}residential/onboard',
+          accessToken: accessToken.value);
+    Map<String,dynamic> body=jsonDecode(response!.body);
+onboardUserInfo.value = OnboardUserInfoModel.fromJson(body);
+    if(body.isNotEmpty){
+       if(body.containsKey('addresses')){
+          return 3;
+       }
+   else if(body.containsKey('residential')){
+          return 2;
+        }else{
+          return 0;
         }
-      } else {
-        isEmailCheck.value = false;
-      }
+    }else{
+        return 0;
+    }
     } catch (e) {
-      print(accessToken);
-      // Handle other exceptions (e.g., network issues)
-      print("Error: ${e.toString()}");
-      print("Error status api $e");
-      print(isEmailCheck.value);
-      showCustomSnackbar(true, "Something went wrong");
+      log(e.toString());
+      return 0;
     }
   }
+
+  // Future<void> checkStatus() async {
+  //   try {
+  //     final response = await ApiService.get(
+  //       endPoint: '${ApiUrls.endpoint}residential/check',
+  //       accessToken: accessToken.value,
+  //       isAuth: false,
+  //     );
+  //     log(response!.statusCode.toString());
+
+  //     // Check for an empty or malformed response body
+  //     if (response != null && response.body.isNotEmpty) {
+  //       if (response.statusCode == 200) {
+  //         // Try to decode the JSON response
+  //         try {
+  //           final jsonData = jsonDecode(response.body);
+  //           isEmailCheck.value = jsonData['success'];
+  //         } catch (e) {
+  //           print("Error decoding JSON: ${e.toString()}");
+  //           showCustomSnackbar(true, "Invalid JSON format");
+  //         }
+  //       } else {
+  //         showCustomSnackbar(true, "Something went wrong");
+  //       }
+  //     } else {
+  //       isEmailCheck.value = false;
+  //     }
+  //   } catch (e) {
+  //     print(accessToken);
+  //     // Handle other exceptions (e.g., network issues)
+  //     print("Error: ${e.toString()}");
+  //     print("Error status api $e");
+  //     print(isEmailCheck.value);
+  //     showCustomSnackbar(true, "Something went wrong");
+  //   }
+  // }
 
   //GET IF NEW VERIFICATIONS EXISTS
   Future<void> getNewVerificationExistance() async {
