@@ -4,7 +4,7 @@ import '../../constants/colors.dart';
 import '../../utils/size_config.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     Key? key,
     required this.title,
     this.isLoading = false,

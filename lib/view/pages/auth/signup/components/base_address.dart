@@ -2,19 +2,15 @@ import 'package:doss_resident/constants/colors.dart';
 import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/controllers/base_address.dart';
 import 'package:doss_resident/utils/size_config.dart';
-import 'package:doss_resident/view/bottomsheets/auth_btm_sheet.dart';
 import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../../../../constants/icons.dart';
 import '../../../../../utils/spacing.dart';
 import '../../../../widgets/auth_textfield.dart';
 import '../../../../widgets/custom_button.dart';
-import '../../../../widgets/custom_drop_down.dart';
-import '../../../../widgets/custom_snackbar.dart';
 
 class BaseAddressPage extends StatefulWidget {
   const BaseAddressPage({
@@ -56,6 +52,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                         if (val == null || val.isEmpty) {
                           return tr("Please enter your address name");
                         }
+                        return null;
         
                         // Check if the value matches the Brazilian zip code format
                       },
@@ -82,12 +79,14 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                           cont.complement.clear();
                           cont.country.clear();
                         }
+                        return null;
                       },
                       onSubmit: (val) => cont.checkZipCode(val),
                       onValidate: (val) {
                         if (val == null || val.isEmpty) {
                           return tr("Please enter your Zip code");
                         }
+                        return null;
         
                         // Check if the value matches the Brazilian zip code format
                       },
@@ -157,6 +156,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                     if (val!.isEmpty) {
                       return tr('Please enter N°');
                     }
+                    return null;
                   },
                   controller: cont.number,
                   keyboardType: TextInputType.text,

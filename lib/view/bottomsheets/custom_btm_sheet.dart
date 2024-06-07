@@ -53,8 +53,8 @@ class CustomBottomSheet extends StatelessWidget {
             Spacing.y(3),
             CustomButton(title: tr(btnTitle), onTap:onTap,
             ),
-            textBtnTitle==null?SizedBox(): Spacing.y(2),
-            textBtnTitle==null?SizedBox():  CustomTextBtn(title: tr(textBtnTitle??""),
+            textBtnTitle==null?const SizedBox(): Spacing.y(2),
+            textBtnTitle==null?const SizedBox():  CustomTextBtn(title: tr(textBtnTitle??""),
             onTap: (){
               Get.back();
             },

@@ -6,9 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../constants/api.dart';
 import '../constants/cont.dart';
 import '../services/api.dart';
@@ -52,33 +49,28 @@ class UserDataCont extends GetxController {
           "mobileTokenId": fcmToken,
           "termsAccept": {"termsAccept": true, "IAmOver12YearsOld": true}
         };
-        log(body.toString());
+        log("thomas jackson");
         final response = await ApiService.post(
           endPoint: '${ApiUrls.endpoint}residential/onboard/user-information',
           accessToken: authCont.accessToken.value,
-          body: body,
-          isAuth: false,
+          body: body
         );
         log(response!.statusCode.toString());
-        log(response!.body.toString());
+        log(response.body.toString());
 
-        if (response != null) {
-          final responseBody = jsonDecode(response.body);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            cont.pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-            // print(responseBody);
-          } else if (response.statusCode == 400) {
-            showCustomSnackbar(true, "${responseBody["errors"][0]}");
-          } else {
-            showCustomSnackbar(true, "${responseBody["errors"][0]}");
-          }
+        final responseBody = jsonDecode(response.body);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          cont.pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+          // print(responseBody);
+        } else if (response.statusCode == 400) {
+          showCustomSnackbar(true, "${responseBody["errors"][0]}");
         } else {
-          showCustomSnackbar(true, "Something went wrong");
+          showCustomSnackbar(true, "${responseBody["errors"][0]}");
         }
-        authCont.isLoading.value = false;
+              authCont.isLoading.value = false;
       } else {}
     } catch (e) {
       authCont.isLoading.value = false;

@@ -6,17 +6,14 @@ import 'package:doss_resident/view/widgets/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../../constants/icons.dart';
-import '../../../../../controllers/sign_in.dart';
 import '../../../../../controllers/sign_up.dart';
 import '../../../../widgets/custom_snackbar.dart';
 import '../../../terms_and_conditions/terms_and_condition.dart';
 
 class EnterEmailPage extends StatefulWidget {
-  EnterEmailPage({
+  const EnterEmailPage({
     Key? key,
     this.isEdit = false,
   }) : super(key: key);

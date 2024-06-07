@@ -98,7 +98,7 @@ class _CreditCardPageState extends State<CreditCardPage> {
               ).tr(),
             ),
             Spacing.y(3),
-            Spacer(),
+            const Spacer(),
             Row(
               children: [
                 Expanded(

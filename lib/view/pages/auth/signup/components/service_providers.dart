@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doss_resident/constants/colors.dart';
 import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/controllers/base_address.dart';
 import 'package:doss_resident/controllers/service_providers.dart';
-import 'package:doss_resident/controllers/sign_up.dart';
 import 'package:doss_resident/models/service_providers.dart';
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:doss_resident/utils/spacing.dart';
@@ -16,9 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../constants/icons.dart';
 import '../../../../bottomsheets/plans_bottom_sheet.dart';
-import '../../../payment/payment_tab.dart';
 
 class ServiceProvidersPage extends StatelessWidget {
   const ServiceProvidersPage({Key? key}) : super(key: key);
@@ -94,7 +90,7 @@ class ServiceProvidersTile extends StatelessWidget {
               placeholder: (_, p) => const Center(
                 child:  CupertinoActivityIndicator(color: Colors.grey),
               ),
-              imageUrl: model!.photoUrl??"",
+              imageUrl: model.photoUrl??"",
               imageBuilder: (_, o) => Container(
                 height: SizeConfig.heightMultiplier * 25,
                 width: SizeConfig.widthMultiplier * 60,
@@ -121,7 +117,7 @@ class ServiceProvidersTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model!.name!.capitalize!,
+                  model.name!.capitalize!,
                   style: textTheme.bodyMedium,
                 ),
                 Spacing.y(2),

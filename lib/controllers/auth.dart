@@ -7,11 +7,9 @@ import 'package:doss_resident/models/user_model.dart';
 import 'package:doss_resident/models/user_more_info.dart';
 import 'package:doss_resident/constants/api.dart';
 import 'package:doss_resident/services/api.dart';
-import 'package:doss_resident/view/pages/bottomnav/bottom_nav_bar.dart';
 import 'package:doss_resident/view/pages/onboarding/onboarding.dart';
 import 'package:doss_resident/view/widgets/custom_snackbar.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:get/get.dart';
@@ -27,7 +25,7 @@ class AuthCont extends GetxController {
   RxBool isEmailCheck=false.obs;
   RxBool isNewVerification = false.obs;
 
-    Rxn<UserMoreInfoModel> _userMoreInfo = Rxn<UserMoreInfoModel>();
+    final Rxn<UserMoreInfoModel> _userMoreInfo = Rxn<UserMoreInfoModel>();
   UserMoreInfoModel? get getUserMoreInfo => _userMoreInfo.value;
 
   @override
@@ -252,8 +250,8 @@ onboardUserInfo.value = OnboardUserInfoModel.fromJson(body);
           accessToken: accessToken.value);
       log(response!.body);
 
-      if (response!.statusCode == 200 || response.statusCode == 201) {
-        final body = jsonDecode(response!.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final body = jsonDecode(response.body);
         isNewVerification.value = body['data']['existsVerificationRequest'];
       }
     } catch (e) {
@@ -269,13 +267,13 @@ onboardUserInfo.value = OnboardUserInfoModel.fromJson(body);
           endPoint: '${ApiUrls.endpoint}residential/info',
           accessToken: accessToken.value);
       log("XXX ${response!.statusCode}");
-      log(response!.body);
+      log(response.body);
 
-      if (response!.statusCode == 200 || response.statusCode == 201) {
-        final body = jsonDecode(response!.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final body = jsonDecode(response.body);
         log("DONNNNNEEE");
         _userMoreInfo.value = UserMoreInfoModel.fromJson(body);
-        if (_userMoreInfo.value!.data!.userStatus == "Active") {
+        if (_userMoreInfo.value!.data.userStatus == "Active") {
           isOnline.value = true;
         }
         log("DONNNNNEEE CONVERSION");

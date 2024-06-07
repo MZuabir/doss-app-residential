@@ -2,7 +2,6 @@
 //
 //     final userMoreInfoModel = userMoreInfoModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UserMoreInfoModel userMoreInfoModelFromJson(String str) => UserMoreInfoModel.fromJson(json.decode(str));

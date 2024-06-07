@@ -22,7 +22,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   final screens = [
     const HomePage(),
     const RoofPage(),
-    NotificationScreen(),
+    const NotificationScreen(),
     const ProfilePage()
   ];
   @override

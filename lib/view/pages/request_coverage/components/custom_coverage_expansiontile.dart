@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../constants/colors.dart';
 import '../../../../utils/size_config.dart';
 import '../../../../utils/spacing.dart';
-import '../../../widgets/custom_drop_down.dart';
 
 
 class CustomCoverageExpansionTile extends StatefulWidget {
@@ -95,7 +94,7 @@ class _CustomCoverageExpansionTileState extends State<CustomCoverageExpansionTil
                               Container(
                                 height: 7,
                                 width: 7,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.green,
                                 ),
@@ -152,7 +151,7 @@ class _CustomCoverageExpansionTileState extends State<CustomCoverageExpansionTil
                           Container(
                             height: SizeConfig.heightMultiplier*35,
                             width: SizeConfig.widthMultiplier*100,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: NetworkImage("https://img.freepik.com/free-vector/blue-sports-car-isolated-white-vector_53876-67354.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1700179200&semt=ais"),
                                 fit: BoxFit.cover,

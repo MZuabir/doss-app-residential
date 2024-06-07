@@ -52,12 +52,12 @@ class PlansCont extends GetxController {
           body: body);
       if (response!.statusCode == 200) {
         final paymentlink=jsonDecode(response.body)['data']['linkVisualizacao'];
-        log("PAYMENT LINK ${paymentlink}");
+        log("PAYMENT LINK $paymentlink");
         Get.to(() => PaymentWebviewPage(url: paymentlink, onSuccess: () {}));
       } else {
         showCustomSnackbar(true, "Something went wrong");
       }
-      log(response!.body);
+      log(response.body);
     } catch (e) {
       showCustomSnackbar(true, "Something went wrong");
     } finally {

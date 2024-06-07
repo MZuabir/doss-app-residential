@@ -13,7 +13,7 @@ import '../../utils/spacing.dart';
 import '../widgets/custom_button.dart';
 
 class PlansBottomSheet extends StatefulWidget {
-  PlansBottomSheet({
+  const PlansBottomSheet({
     super.key,
     required this.sID,
   });

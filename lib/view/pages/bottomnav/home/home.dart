@@ -1,6 +1,5 @@
 import 'package:doss_resident/controllers/bottomNav.dart';
 import 'package:doss_resident/view/bottomsheets/custom_btm_sheet.dart';
-import 'package:doss_resident/view/pages/bottomnav/roof/roof.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

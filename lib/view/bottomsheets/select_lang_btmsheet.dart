@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/colors.dart';
 import '../../constants/icons.dart';
@@ -11,7 +10,7 @@ import '../../controllers/auth.dart';
 import '../../utils/size_config.dart';
 
 class SelectLanguageBS extends GetWidget<AuthCont> {
-  SelectLanguageBS({
+  const SelectLanguageBS({
     super.key,
   });
 
@@ -22,7 +21,7 @@ class SelectLanguageBS extends GetWidget<AuthCont> {
       width: SizeConfig.widthMultiplier * 100,
       decoration: BoxDecoration(
           color: AppColors.darkGryClr,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25), topRight: Radius.circular(25))),
       padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.widthMultiplier * 5,
@@ -44,7 +43,7 @@ class SelectLanguageBS extends GetWidget<AuthCont> {
                     () => ListTile(
                   onTap: () => _onListTap(context, i),
                   trailing: controller.userLanguage.value == languages[i]
-                      ? Icon(Icons.done, color: Colors.white)
+                      ? const Icon(Icons.done, color: Colors.white)
                       : null,
                   leading: Image.asset(
                     i == 0

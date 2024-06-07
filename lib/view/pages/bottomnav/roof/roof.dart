@@ -2,8 +2,6 @@ import 'package:doss_resident/view/widgets/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import '../../../../utils/size_config.dart';
 import '../../../../utils/spacing.dart';
 import '../../../widgets/background.dart';

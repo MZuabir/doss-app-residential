@@ -6,12 +6,11 @@ import '../../../../constants/colors.dart';
 import '../../../../utils/size_config.dart';
 import '../../../../utils/spacing.dart';
 import '../../../widgets/background.dart';
-import '../../../widgets/custom_appbar.dart';
 import 'components/all.dart';
 import 'components/history_roof.dart';
 
 class NotificationScreen extends StatefulWidget {
-  NotificationScreen({super.key});
+  const NotificationScreen({super.key});
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();

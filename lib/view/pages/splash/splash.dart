@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/constants/local_db.dart';

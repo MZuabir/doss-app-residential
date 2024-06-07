@@ -1,13 +1,9 @@
-import 'package:doss_resident/view/widgets/txt_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../../constants/colors.dart';
-import '../../../../../constants/icons.dart';
 import '../../../../../utils/size_config.dart';
 import '../../../../../utils/spacing.dart';
-import '../../../../bottomsheets/custom_btm_sheet.dart';
 
 
 class VehicleCard extends StatefulWidget {

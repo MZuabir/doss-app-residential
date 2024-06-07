@@ -1,10 +1,8 @@
-import 'package:doss_resident/constants/colors.dart';
 import 'package:doss_resident/constants/icons.dart';
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:doss_resident/utils/spacing.dart';
 import 'package:doss_resident/view/widgets/background.dart';
 import 'package:doss_resident/view/widgets/custom_appbar.dart';
-import 'package:doss_resident/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'components/custom_relative_btn.dart';

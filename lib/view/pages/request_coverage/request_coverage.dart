@@ -2,7 +2,6 @@ import 'package:doss_resident/models/stepper.dart';
 import 'package:doss_resident/constants/icons.dart';
 import 'package:doss_resident/view/pages/bottomnav/bottom_nav_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +10,6 @@ import '../../../utils/size_config.dart';
 import '../../../utils/spacing.dart';
 import '../../bottomsheets/custom_btm_sheet.dart';
 import '../../widgets/background.dart';
-import '../../widgets/custom_button.dart';
 import '../../widgets/stepper.dart';
 import 'components/custom_cancel_btn.dart';
 import 'components/custom_coverage_expansiontile.dart';

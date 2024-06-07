@@ -18,7 +18,7 @@ import '../../../../../utils/spacing.dart';
 import '../../../../widgets/custom_image_picker.dart';
 
 class UserData extends StatefulWidget {
-  UserData({
+  const UserData({
     Key? key,
     this.isEdit = false,
   }) : super(key: key);
@@ -32,9 +32,9 @@ class _UserDataState extends State<UserData> {
   final cont = Get.put(UserDataCont());
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    cont.photo?.value = image;
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    cont.photo.value = image;
   }
 
   Future<void> convertImageToBase64(
@@ -112,7 +112,6 @@ class _UserDataState extends State<UserData> {
                             .replaceAll("[", "")
                             .replaceAll("]", "");
                       }
-                      ;
                     }
                   },
                   title: "CPF or CNPJ",
@@ -200,6 +199,7 @@ class _UserDataState extends State<UserData> {
                     if (val!.isEmpty) {
                       return tr("Please enter name");
                     }
+                    return null;
                   },
                   title: "Name",
                   hintText: "Full Name",
@@ -212,6 +212,7 @@ class _UserDataState extends State<UserData> {
                     if (val!.isEmpty) {
                       return tr("Please enter phone number");
                     }
+                    return null;
                   },
                   title: tr("Cell"),
                   hintText: "Enter your cell number",

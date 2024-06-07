@@ -1,8 +1,5 @@
-import 'package:doss_resident/constants/cont.dart';
-import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../controllers/sign_up.dart';
@@ -10,7 +7,6 @@ import '../../../../utils/size_config.dart';
 import '../../../../utils/spacing.dart';
 import '../../../widgets/background.dart';
 import '../../../widgets/custom_appbar.dart';
-import '../../../widgets/custom_snackbar.dart';
 import 'components/base_address.dart';
 import 'components/enter_email.dart';
 import 'components/user_data.dart';
@@ -59,9 +55,9 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
                           },
                           itemBuilder: (context, index) {
                             if (index == 0) {
-                              return EnterEmailPage();
+                              return const EnterEmailPage();
                             } else if (index == 1) {
-                              return UserData(
+                              return const UserData(
                                   // onTap: () {
                                   // _pageController.nextPage(
                                   //   duration: const Duration(milliseconds: 300),
@@ -70,10 +66,11 @@ class _OnBoardingState extends State<SignUpOnBoardingPage> {
                                   // },
                                   );
                             } else if (index == 2) {
-                              return BaseAddressPage();
+                              return const BaseAddressPage();
                             } else if (index == 3) {
                               return const ServiceProvidersPage();
                             }
+                            return null;
                           },
                         ),
                       ),

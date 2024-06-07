@@ -1,8 +1,5 @@
 import 'package:doss_resident/constants/colors.dart';
-import 'package:doss_resident/utils/size_config.dart';
-import 'package:doss_resident/view/widgets/custom_snackbar.dart';
 import 'package:doss_resident/view/widgets/loading.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

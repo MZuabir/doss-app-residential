@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class ApiService {
-  static const Map<String, String>? _authheader = {
+  static const Map<String, String> _authheader = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
     'X-CSRFToken':
@@ -17,17 +17,12 @@ class ApiService {
       required String accessToken,
       bool isAuth = false}) async {
     final response = await http.post(Uri.parse(endPoint),
-        headers: isAuth
-            ? _authheader
-            : {
-                // 'accept': 'application/json',
-                // 'Content-Type': 'application/json',
-                'Authorization': "Bearer $accessToken",
-              },
-        body: body);
-    log(endPoint.toString());
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken",
+        },
+        body: jsonEncode(body));
 
-    log(response!.statusCode.toString());
     if (response.body.isNotEmpty) {
       final jsonData = jsonDecode(response.body);
     }
@@ -40,17 +35,10 @@ class ApiService {
       required String accessToken,
       bool isAuth = false}) async {
     log(endPoint);
-   
-    final response = await http.get(Uri.parse(endPoint),
-        headers: {
-                // 'accept': 'application/json',
-                // 'Content-Type': 'application/json',
-                'Authorization': "Bearer $accessToken",
-              });
 
-log("RESPONSE"+ response.statusCode.toString());
-log("RESPONSE BODY"+ response.body);
-
+    final response = await http.get(Uri.parse(endPoint), headers: {
+      'Authorization': "Bearer $accessToken",
+    });
 
     // if (response.statusCode == 200) {
     //   return response;
@@ -63,15 +51,12 @@ log("RESPONSE BODY"+ response.body);
       Map<String, dynamic>? body,
       required String accessToken,
       bool isAuth = false}) async {
-    log(jsonEncode(body));
     final response = await http.put(Uri.parse(endPoint),
-        headers: isAuth
-            ? _authheader
-            : {
-                'accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': "Bearer $accessToken",
-              },
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer $accessToken",
+        },
         body: jsonEncode(body));
 
     log(endPoint.toString());

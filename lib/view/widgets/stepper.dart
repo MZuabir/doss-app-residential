@@ -1,5 +1,4 @@
 import 'package:doss_resident/constants/colors.dart';
-import 'package:doss_resident/constants/icons.dart';
 import 'package:doss_resident/utils/size_config.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -59,8 +58,8 @@ class CustomStepper extends StatelessWidget {
               Text(title, style:index==3? textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600):
               textTheme.bodyMedium,
               ).tr(),
-             subTitle!=null? Spacing.y(0.2):SizedBox(),
-             subTitle!=null? Text(subTitle??"", style: textTheme.bodySmall).tr():SizedBox(),
+             subTitle!=null? Spacing.y(0.2):const SizedBox(),
+             subTitle!=null? Text(subTitle??"", style: textTheme.bodySmall).tr():const SizedBox(),
             ],
           ),
         ),

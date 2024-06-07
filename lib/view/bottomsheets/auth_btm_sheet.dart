@@ -1,9 +1,7 @@
 import 'package:doss_resident/constants/cont.dart';
-import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../constants/colors.dart';
 import '../../utils/size_config.dart';

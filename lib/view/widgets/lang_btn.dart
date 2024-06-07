@@ -17,7 +17,7 @@ class SelectLangButton extends GetWidget<AuthCont> {
     final textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
-      onTap: () => Get.bottomSheet(SelectLanguageBS()),
+      onTap: () => Get.bottomSheet(const SelectLanguageBS()),
       child: Container(
         height: SizeConfig.heightMultiplier * 3.5,
         width: SizeConfig.widthMultiplier * 35,
