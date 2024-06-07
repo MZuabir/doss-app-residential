@@ -71,54 +71,8 @@ class _UserDataState extends State<UserData> {
                   "User Data",
                   style: textTheme.headlineMedium,
                 ).tr(),
+                
                 Spacing.y(3),
-                AuthTextField(
-                  focusNode: cont.documentNode,
-                  formatter: [
-                    cont.isCpfSelected.value
-                        ? MaskTextInputFormatter(mask: "###.###.###-##")
-                        : MaskTextInputFormatter(mask: "##.###.###/####-##")
-                  ],
-                  onValidate: (val) {
-                    if (val!.isEmpty) {
-                      return tr("Please enter Document number");
-                    } else {
-                      // String? validation = ;
-                      //   print("object");
-                      // return validation == null
-                      //     ? "Invalid"
-                      //     : validation.contains(",")
-                      //         ? validation.split(",")[1].trim().split("]")[0]
-                      //         : validation
-                      //             .replaceAll("[", "")
-                      //             .replaceAll("]", "");
-                      String? validation = cont.isCpfSelected.value
-                          ? Validador()
-                              .add(Validar.CPF, msg: 'CPF Inválido')
-                              .add(Validar.OBRIGATORIO, msg: 'xyz')
-                              .minLength(11)
-                              .maxLength(11)
-                              .valido(val, clearNoNumber: true)
-                          : Validador()
-                              .add(Validar.CNPJ, msg: 'CNPJ Inválido')
-                              .add(Validar.OBRIGATORIO, msg: 'xyz')
-                              .minLength(11)
-                              .maxLength(11)
-                              .valido(val, clearNoNumber: true);
-                      if (validation == null) {
-                        return null;
-                      } else {
-                        return validation
-                            .replaceAll("[", "")
-                            .replaceAll("]", "");
-                      }
-                    }
-                  },
-                  title: "CPF or CNPJ",
-                  hintText: "Enter your document",
-                  controller: cont.document,
-                  keyboardType: TextInputType.number,
-                ),
                 Row(
                   children: [
                     Row(
@@ -192,6 +146,55 @@ class _UserDataState extends State<UserData> {
                     ),
                   ],
                 ),
+                Spacing.y(3),
+                AuthTextField(
+                  focusNode: cont.documentNode,
+                  formatter: [
+                    cont.isCpfSelected.value
+                        ? MaskTextInputFormatter(mask: "###.###.###-##")
+                        : MaskTextInputFormatter(mask: "##.###.###/####-##")
+                  ],
+                  onValidate: (val) {
+                    if (val!.isEmpty) {
+                      return tr("Please enter Document number");
+                    } else {
+                      // String? validation = ;
+                      //   print("object");
+                      // return validation == null
+                      //     ? "Invalid"
+                      //     : validation.contains(",")
+                      //         ? validation.split(",")[1].trim().split("]")[0]
+                      //         : validation
+                      //             .replaceAll("[", "")
+                      //             .replaceAll("]", "");
+                      String? validation = cont.isCpfSelected.value
+                          ? Validador()
+                              .add(Validar.CPF, msg: 'CPF Inválido')
+                              .add(Validar.OBRIGATORIO, msg: 'xyz')
+                              .minLength(11)
+                              .maxLength(11)
+                              .valido(val, clearNoNumber: true)
+                          : Validador()
+                              .add(Validar.CNPJ, msg: 'CNPJ Inválido')
+                              .add(Validar.OBRIGATORIO, msg: 'xyz')
+                              .minLength(11)
+                              .maxLength(11)
+                              .valido(val, clearNoNumber: true);
+                      if (validation == null) {
+                        return null;
+                      } else {
+                        return validation
+                            .replaceAll("[", "")
+                            .replaceAll("]", "");
+                      }
+                    }
+                  },
+                  title: "Documento",
+                  hintText: "Enter your document",
+                  controller: cont.document,
+                  keyboardType: TextInputType.number,
+                ),
+                
                 Spacing.y(3),
                 AuthTextField(
                   focusNode: cont.nameNode,

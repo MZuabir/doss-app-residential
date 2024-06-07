@@ -24,7 +24,7 @@ class BaseAddressCont extends GetxController {
 
   TextEditingController zipCode = TextEditingController();
   TextEditingController addressName = TextEditingController();
-  String neighborhood='';
+  String neighborhood = '';
   TextEditingController complement = TextEditingController();
   final FocusNode numberNode = FocusNode();
   final FocusNode countryNode = FocusNode();
@@ -38,7 +38,7 @@ class BaseAddressCont extends GetxController {
       final body = {
         "homePlaceId": "",
         "homePlaceName": addressName.text,
-        "selectHomePlaceDefault": "true",
+        "selectHomePlaceDefault": true,
         "country": country.text,
         "state": state.text,
         "city": city.text,
@@ -49,8 +49,6 @@ class BaseAddressCont extends GetxController {
         "number": number.text,
       };
 
-      log(body.toString());
-    
       authCont.isLoading.value = true;
       final response = await ApiService.post(
         endPoint: '${ApiUrls.endpoint}residential/onboard/address',
@@ -61,7 +59,7 @@ class BaseAddressCont extends GetxController {
       if (response != null) {
         final responseBody = jsonDecode(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
-            log("RESPONSE NEW ${response.body}".toString());
+          log("RESPONSE NEW ${response.body}".toString());
           cont.pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,

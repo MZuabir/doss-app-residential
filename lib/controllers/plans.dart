@@ -20,16 +20,14 @@ class PlansCont extends GetxController {
     try {
       _plans.value = null;
       final response = await ApiService.get(
-          endPoint:
-              '${ApiUrls.endpoint}service-provider/plans/$workPlaceID',
+          endPoint: '${ApiUrls.endpoint}service-provider/plans/$workPlaceID',
           accessToken: authCont.accessToken.value);
-          _plans.value=[];
-          final  body=jsonDecode(response!.body);
+      _plans.value = [];
+      final body = jsonDecode(response!.body);
       log(body.toString());
-      body.forEach((element){
+      body.forEach((element) {
         _plans.value!.add(PlansModel.fromJson(element));
       });
-   
     } catch (e) {
       log(e.toString());
       showCustomSnackbar(true, "Something went wrong");
@@ -44,20 +42,18 @@ class PlansCont extends GetxController {
 
       String planID = _plans.value![selectedPlan.value].id!;
       final body = {"tokenId": fcmToken, "planId": planID};
-     
       final response = await ApiService.post(
-          endPoint:
-              '${ApiUrls.endpoint}residential/onboard/service-provider/payment/plan',
+          endPoint: '${ApiUrls.endpoint}residential/payment/plan',
           accessToken: authCont.accessToken.value,
           body: body);
       if (response!.statusCode == 200) {
-        final paymentlink=jsonDecode(response.body)['data']['linkVisualizacao'];
+        final paymentlink =
+            jsonDecode(response.body)['data']['linkVisualizacao'];
         log("PAYMENT LINK $paymentlink");
         Get.to(() => PaymentWebviewPage(url: paymentlink, onSuccess: () {}));
       } else {
         showCustomSnackbar(true, "Something went wrong");
       }
-      log(response.body);
     } catch (e) {
       showCustomSnackbar(true, "Something went wrong");
     } finally {

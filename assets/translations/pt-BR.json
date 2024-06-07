@@ -248,7 +248,8 @@
     "Terms of Use and Privacy": "Termos de uso e privacidade",
     "Policies": "Políticas",
     "Full Name":"Nome completo",
-    "Please enter your address name":"Por favor insira o nome do seu endereço",
-    "Address Name":"Endereço Nome",
-    "Enter your address name":"De um nome do seu endereço"
+    "Please enter your address name":"Por favor insira o nome da sua residência",
+    "Address Name":"Nome da Residência",
+    "Enter your address name":"De um nome da sua residência",
+    "Please enter N°": "Por favor insira o número da residência"
 }

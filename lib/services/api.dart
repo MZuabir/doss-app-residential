@@ -18,14 +18,11 @@ class ApiService {
       bool isAuth = false}) async {
     final response = await http.post(Uri.parse(endPoint),
         headers: {
+          "accept": "application/json",
           "Content-Type": "application/json",
           "Authorization": "Bearer $accessToken",
         },
         body: jsonEncode(body));
-
-    if (response.body.isNotEmpty) {
-      final jsonData = jsonDecode(response.body);
-    }
 
     return response;
   }
