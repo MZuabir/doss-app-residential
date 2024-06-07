@@ -46,15 +46,17 @@ class PlansCont extends GetxController {
           endPoint: '${ApiUrls.endpoint}residential/payment/plan',
           accessToken: authCont.accessToken.value,
           body: body);
+    log(response!.body.toString());
       if (response!.statusCode == 200) {
         final paymentlink =
-            jsonDecode(response.body)['data']['linkVisualizacao'];
+            jsonDecode(response.body)['linkVisualizacao'];
         log("PAYMENT LINK $paymentlink");
         Get.to(() => PaymentWebviewPage(url: paymentlink, onSuccess: () {}));
       } else {
         showCustomSnackbar(true, "Something went wrong");
       }
     } catch (e) {
+      log(e.toString());
       showCustomSnackbar(true, "Something went wrong");
     } finally {
       isLoading.value = false;

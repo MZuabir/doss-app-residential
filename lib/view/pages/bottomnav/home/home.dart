@@ -1,5 +1,7 @@
+import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/controllers/bottomNav.dart';
 import 'package:doss_resident/view/bottomsheets/custom_btm_sheet.dart';
+import 'package:doss_resident/view/pages/vehicles/vehicles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -151,14 +153,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
   void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+   if(!authCont.residentialInfo!.value!.homePlaces!.first.registeredVehicle!){
+     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return   CustomBottomSheet(
           icon: AppIcons.car,
           onTap: (){
             Get.back();
-            Get.to(()=>const CarPage(),
+            Get.to(()=>const VehiclesPage(),
               transition: Transition.rightToLeft,
             );
           },
@@ -169,6 +172,11 @@ class _HomePageState extends State<HomePage> {
         ); // Use the separate BottomSheet widget
       },
     );
+   }else{
+      Get.to(()=>const VehiclesPage(),
+              transition: Transition.rightToLeft,
+            );
+   }
   }
   void _showReqVerificationBottomSheet(BuildContext context) {
     showModalBottomSheet(

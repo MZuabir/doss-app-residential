@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 import 'package:doss_resident/models/onboard_userinfo.dart';
+import 'package:doss_resident/models/residential_info.dart';
 import 'package:doss_resident/models/user_model.dart';
 import 'package:doss_resident/models/user_more_info.dart';
 import 'package:doss_resident/constants/api.dart';
@@ -19,7 +20,9 @@ import '../constants/local_db.dart';
 import '../view/pages/auth/signup/signup_onboarding.dart';
 
 class AuthCont extends GetxController {
+
   Rxn<OnboardUserInfoModel> onboardUserInfo=Rxn<OnboardUserInfoModel>();
+  Rxn<ResidentialInfoModel> residentialInfo= Rxn<ResidentialInfoModel>();
   RxInt bnbIndex = 0.obs;
   RxBool isOnline = false.obs;
   RxBool isEmailCheck=false.obs;
@@ -150,6 +153,21 @@ class AuthCont extends GetxController {
       return false;
     }
   }
+
+    Future<void> getResidentialInfoFromBackend()async{
+      try {
+      final response = await ApiService.get(
+          endPoint: '${ApiUrls.endpoint}residential/info',
+          accessToken: accessToken.value);
+            log(response!.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        residentialInfo.value =
+            ResidentialInfoModel.fromJson(jsonDecode(response.body));
+      }else{}
+      } catch (e) {
+        
+      }
+    }
 
   UserModel parseIdToken(String idToken) {
     final parts = idToken.split(r'.');

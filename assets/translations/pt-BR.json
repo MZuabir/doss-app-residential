@@ -251,5 +251,9 @@
     "Please enter your address name":"Por favor insira o nome da sua residência",
     "Address Name":"Nome da Residência",
     "Enter your address name":"De um nome da sua residência",
-    "Please enter N°": "Por favor insira o número da residência"
+    "Please enter N°": "Por favor insira o número da residência",
+    "Your registration is complete and your plan is active, but you still need to add your vehicle information.":"Seu registro está completo e seu plano está ativo, mas você ainda precisa adicionar as informações do seu veículo.",
+    "Add vehicle":"Adicionar veículo",
+    "I'll do it later":"Eu farei isso mais tarde"
+    
 }

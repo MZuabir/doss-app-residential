@@ -7,10 +7,10 @@ import '../../utils/size_config.dart';
 import '../../utils/spacing.dart';
 
 class CustomAppbar extends StatelessWidget {
-   const CustomAppbar({super.key, required this.title, this.onTap,  this.isIcon=false,this.icon});
+   const CustomAppbar({super.key, required this.title, this.onTap,  this.isIcon=false,this.icon, this.actionOnTap});
 
   final String title;
-  final VoidCallback? onTap;
+  final VoidCallback? onTap,actionOnTap;
   final bool isIcon;
   final String? icon;
 
@@ -34,9 +34,12 @@ class CustomAppbar extends StatelessWidget {
            ),
         const Spacer(),
         isIcon?Spacing.x(0):Spacing.x(5),
-        isIcon?Image.asset(icon??AppIcons.add,
-        height: SizeConfig.imageSizeMultiplier*8,
-        width: SizeConfig.imageSizeMultiplier*8,
+        isIcon?InkWell(
+          onTap: actionOnTap,
+          child: Image.asset(icon??AppIcons.add,
+          height: SizeConfig.imageSizeMultiplier*8,
+          width: SizeConfig.imageSizeMultiplier*8,
+          ),
         ):const SizedBox(),
       ],
     );

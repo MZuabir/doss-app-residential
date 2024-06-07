@@ -249,5 +249,8 @@
     "Logout":"Logout",
     "Please enter your address name":"Please enter your address name",
     "Address Name":"Address Name",
-    "Enter your address name":"Enter your address name"
+    "Enter your address name":"Enter your address name",
+    "Your registration is complete and your plan is active, but you still need to add your vehicle information.":"Your registration is complete and your plan is active, but you still need to add your vehicle information.",
+    "Add vehicle":"Add vehicle",
+    "I'll do it later":"I'll do it later"
 }
