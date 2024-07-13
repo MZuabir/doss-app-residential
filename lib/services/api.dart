@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:doss_resident/constants/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -56,8 +57,50 @@ class ApiService {
         },
         body: jsonEncode(body));
 
-    log(endPoint.toString());
-    log(jsonEncode(body).toString());
+    if (response.body.isNotEmpty) {
+      final jsonData = jsonDecode(response.body);
+      print(jsonData);
+    }
+
+    return response;
+  }
+
+  static Future<Response?> getToken({
+    required String token,
+    Map<String, dynamic>? body,
+  }) async {
+    final response = await http.get(
+      Uri.parse(ApiUrls.getTicket),
+      headers: {
+        'accept': 'application/json',
+        'Authorization': "Bearer $token",
+      },
+    );
+    // log("here is respond body ${response.request}");
+    // log("here is respond status code ${response.statusCode}");
+    // log(token);
+
+    if (response.body.isNotEmpty) {
+      final jsonData = jsonDecode(response.body);
+      print(jsonData);
+    }
+
+    return response;
+  }
+
+  static Future<Response?> generateTicket({
+    required String token,
+    Map<String, dynamic>? body,
+  }) async {
+    final response = await http.post(
+      Uri.parse(ApiUrls.generateTicket),
+      headers: {
+        'accept': 'application/json',
+        'Authorization': "Bearer $token",
+      },
+      body: jsonEncode(body),
+    );
+   
     if (response.body.isNotEmpty) {
       final jsonData = jsonDecode(response.body);
       print(jsonData);

@@ -30,7 +30,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Obx(
-    ()=> ShowLoading(
+      () => ShowLoading(
         inAsyncCall: authCont.isLoading.value,
         child: Form(
           key: cont.formKey,
@@ -44,27 +44,22 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                   style: textTheme.headlineMedium,
                 ).tr(),
                 Spacing.y(3),
-                 AuthTextField(
-                 
-      
-                    
-                      onValidate: (val) {
-                        if (val == null || val.isEmpty) {
-                          return tr("Please enter your address name");
-                        }
-                        return null;
-        
-                        // Check if the value matches the Brazilian zip code format
-                      },
-                      title: "Address Name",
-                      hintText: "Enter your address name",
-                      controller: cont.addressName,
-                 
+                AuthTextField(
+                  onValidate: (val) {
+                    if (val == null || val.isEmpty) {
+                      return tr("Please enter your address name");
+                    }
+                    return null;
+
+                    // Check if the value matches the Brazilian zip code format
+                  },
+                  title: "Address Name",
+                  hintText: "Enter your address name",
+                  controller: cont.addressName,
                 ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    
                     AuthTextField(
                       focusNode: cont.zipCodeNode,
                       formatter: [MaskTextInputFormatter(mask: "#####-###")],
@@ -87,7 +82,7 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                           return tr("Please enter your Zip code");
                         }
                         return null;
-        
+
                         // Check if the value matches the Brazilian zip code format
                       },
                       title: "Zip Code",
@@ -163,20 +158,19 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
                 ),
                 CustomButton(
                     title: "Next",
-                    onTap: () async{
+                    onTap: () async {
                       cont.zipCodeNode.unfocus();
                       cont.numberNode.unfocus();
                       cont.complementNode.unfocus();
-        
+
                       if (cont.formKey.currentState!.validate() &&
                           cont.country.text.isNotEmpty &&
                           cont.city.text.isNotEmpty &&
                           cont.street.text.isNotEmpty &&
-                          cont.state.text.isNotEmpty && cont.addressName.text.isNotEmpty) {
+                          cont.state.text.isNotEmpty &&
+                          cont.addressName.text.isNotEmpty) {
                         await cont.postBaseAddress();
-                      } else {
-                       
-                      }
+                      } else {}
                     }),
                 Spacing.y(3),
               ],
@@ -188,8 +182,6 @@ class _BaseAddressPageState extends State<BaseAddressPage> {
   }
 
   void _showBottomSheet(BuildContext context) async {
-   
-
     // showModalBottomSheet(
     //   context: context,
     //   builder: (BuildContext context) {

@@ -88,7 +88,7 @@ class AuthCont extends GetxController {
         accessToken.value = result.accessToken!;
         saveUserTokens(result);
        int selectedPage= await checkStatus();
-        // await getUserMoreInfoFromBackend();
+        await getUserMoreInfoFromBackend();
  
           // Get.to(
           //   () => const BottomNavPage(),

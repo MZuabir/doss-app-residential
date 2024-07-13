@@ -60,6 +60,7 @@ dependencies:
   permission_handler: ^11.3.0
   webview_flutter: 
   validadores: ^1.0.9
+  audio_waveforms: ^1.0.5
 
 
 dev_dependencies:

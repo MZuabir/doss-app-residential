@@ -1,6 +1,7 @@
 import 'package:doss_resident/constants/cont.dart';
 import 'package:doss_resident/constants/icons.dart';
 import 'package:doss_resident/controllers/plans.dart';
+import 'package:doss_resident/controllers/sign_up.dart';
 import 'package:doss_resident/view/widgets/loading.dart';
 import 'package:doss_resident/view/widgets/txt_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -181,7 +182,8 @@ class _PlansBottomSheetState extends State<PlansBottomSheet> {
                       CustomTextBtn(
                         title: "To go back",
                         onTap: () {
-                          Get.back();
+                          // Get.back();
+                          Get.find<SignUpCont>().onPaymentSuccess();
                         },
                       ),
                       Spacing.y(3),

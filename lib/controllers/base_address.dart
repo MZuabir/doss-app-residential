@@ -85,6 +85,7 @@ class BaseAddressCont extends GetxController {
     try {
       isCheckingZipCode.value = true;
       final model = await ZipCodeService.getZipCodeDetails(val);
+      log(model?.toJson().toString() ?? "no data");
       if (model != null) {
         state.text = model.state.sigla;
         city.text = model.city.name;
